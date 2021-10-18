@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar-color h-14 flex justify-between items-center">
-    <Logo />
-    <p class="font-bold text-white pr-9">Erlaine</p>
-  </nav>
+	<nav class="navbar-color h-16 flex justify-between items-center">
+		<Logo />
+		<p class="font-bold text-white pr-9">Erlaine</p>
+	</nav>
 </template>
 
 <script lang="ts">
@@ -12,6 +12,6 @@ export default Vue.extend({})
 
 <style scoped>
 .navbar-color {
-  background: #3f53fd;
+	background: #3f53fd;
 }
 </style>
