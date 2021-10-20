@@ -14,6 +14,8 @@ module.exports = {
 			blue: '#3F53FD',
 			'blue-dark': '#4953b8',
 			'blue-twitter': '#2aa9e0',
+			'kanban-column-title': '#47484F',
+			'border-color': '#E7E9FF',
 		},
 	},
 	variants: {},
