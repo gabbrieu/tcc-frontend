@@ -51,9 +51,21 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
+import { IGetAllCustomersResponse } from '~/types/customer.types';
 
 export default Vue.extend({
+	async created() {
+		try {
+			const customers: IGetAllCustomersResponse = await this.$axios.$get(
+				'http://127.0.0.1:3002/customers'
+			);
+			console.log(customers);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+
 	data() {
 		return {
 			newTasks: '',
@@ -80,9 +92,9 @@ export default Vue.extend({
 				{ name: 'Finalizados 2' },
 				{ name: 'Finalizados 3' },
 			],
-		}
+		};
 	},
-})
+});
 </script>
 
 <style scoped>
