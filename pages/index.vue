@@ -21,29 +21,23 @@
 			</button>
 			<div class="flex flex-row">
 				<div class="flex flex-col flex-1">
-					<KanbanColumn
-						title="Cliente em potencial"
-						:column="potentialClient"
-					/>
+					<KanbanColumn title="Cliente em potencial" :column="customers(1)" />
 				</div>
 
 				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Contato realizado" :column="contactMade" />
+					<KanbanColumn title="Contato realizado" :column="customers(1)" />
 				</div>
 
 				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Visita agendada" :column="scheduledVisit" />
+					<KanbanColumn title="Visita agendada" :column="customers(3)" />
 				</div>
 
 				<div class="flex flex-col flex-1">
-					<KanbanColumn
-						title="Negócio em andamento"
-						:column="businessInProgress"
-					/>
+					<KanbanColumn title="Negócio em andamento" :column="customers(4)" />
 				</div>
 
 				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Finalizados" :column="done" />
+					<KanbanColumn title="Finalizados" :column="customers(5)" />
 				</div>
 			</div>
 		</main>
@@ -52,47 +46,20 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { IGetAllCustomersResponse } from '~/types/customer.types';
+import { getModule } from 'vuex-module-decorators';
+import { Customers } from '../store/customers';
 
 export default Vue.extend({
-	async created() {
-		try {
-			const customers: IGetAllCustomersResponse = await this.$axios.$get(
-				'http://127.0.0.1:3002/customers'
-			);
-			console.log(customers);
-		} catch (error) {
-			console.log(error);
-		}
+	methods: {
+		customers(column: number) {
+			const myModule = getModule(Customers);
+			return myModule.getCustomers.filter((value) => value.column === column);
+		},
 	},
 
-	data() {
-		return {
-			newTasks: '',
-			potentialClient: [
-				{ name: 'Cliente em potencial 1' },
-				{ name: 'Cliente em potencial 2' },
-				{ name: 'Cliente em potencial 3' },
-				{ name: 'Cliente em potencial 4' },
-			],
-			contactMade: [
-				{ name: 'Contato realizado 1' },
-				{ name: 'Contato realizado 2' },
-				{ name: 'Contato realizado 3' },
-				{ name: 'Contato realizado 4' },
-				{ name: 'Contato realizado 5' },
-			],
-			scheduledVisit: [{ name: 'Visita agendada 1' }],
-			businessInProgress: [
-				{ name: 'Negócio em andamento 1' },
-				{ name: 'Negócio em andamento 2' },
-			],
-			done: [
-				{ name: 'Finalizados 1' },
-				{ name: 'Finalizados 2' },
-				{ name: 'Finalizados 3' },
-			],
-		};
+	mounted() {
+		const myModule = getModule(Customers);
+		myModule.getUsers();
 	},
 });
 </script>

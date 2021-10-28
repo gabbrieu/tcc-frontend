@@ -12,9 +12,12 @@
 	},
 	"dependencies": {
 		"@nuxtjs/axios": "^5.13.6",
+		"babel-plugin-transform-decorators": "^6.24.1",
 		"core-js": "^3.15.1",
 		"nuxt": "^2.15.7",
-		"vuedraggable": "^2.24.3"
+		"tslib": "^2.3.1",
+		"vuedraggable": "^2.24.3",
+		"vuex-module-decorators": "^1.0.1"
 	},
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.14.7",

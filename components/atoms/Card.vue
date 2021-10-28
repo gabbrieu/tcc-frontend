@@ -2,17 +2,17 @@
 	<draggable class="list" :list="array" group="tasks" animation="250">
 		<div
 			class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
-			v-for="element in array"
-			:key="element.name"
+			v-for="customer in array"
+			:key="customer.id"
 		>
-			{{ element.name }}
+			{{ customer.name }}
 		</div>
 	</draggable>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import draggable from 'vuedraggable'
+import Vue from 'vue';
+import draggable from 'vuedraggable';
 
 export default Vue.extend({
 	components: {
@@ -21,5 +21,5 @@ export default Vue.extend({
 	props: {
 		array: Array,
 	},
-})
+});
 </script>
