@@ -28,12 +28,12 @@ export class Customers extends VuexModule {
 		return this.customers;
 	}
 
-	@Action
+	@Action({rawError: true})
 	async getUsers() {
 		const usersResponse: IGetAllCustomersResponse = await $axios.$get(
 			'http://127.0.0.1:3002/customers'
 		);
-		this.setUsers(usersResponse.data);
-		this.setCount(usersResponse.count);
+		this.context.commit('setUsers', usersResponse.data);
+		this.context.commit('setCount', usersResponse.count);
 	}
 }

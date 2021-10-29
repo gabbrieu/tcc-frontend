@@ -50,16 +50,20 @@ import { getModule } from 'vuex-module-decorators';
 import { Customers } from '../store/customers';
 
 export default Vue.extend({
+	data() {
+		return {
+			myModule: new Customers(Customers)
+		}
+	},
 	methods: {
 		customers(column: number) {
-			const myModule = getModule(Customers);
-			return myModule.getCustomers.filter((value) => value.column === column);
+			return this.myModule.getCustomers.filter((value) => value.column === column);
 		},
 	},
 
-	mounted() {
-		const myModule = getModule(Customers);
-		myModule.getUsers();
+	created() {
+		this.myModule = getModule(Customers);
+		this.myModule.getUsers();
 	},
 });
 </script>

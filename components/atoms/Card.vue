@@ -1,5 +1,5 @@
 <template>
-	<draggable class="list" :list="array" group="tasks" animation="250">
+	<draggable class="list" :list="array" group="tasks" animation="250" @end="reOrder">
 		<div
 			class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
 			v-for="customer in array"
@@ -21,5 +21,10 @@ export default Vue.extend({
 	props: {
 		array: Array,
 	},
+	methods: {
+		reOrder(c: any) {
+			console.log(c)
+		}
+	}
 });
 </script>
