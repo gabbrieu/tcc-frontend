@@ -21,23 +21,23 @@
 			</button>
 			<div class="flex flex-row">
 				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Cliente em potencial" :column="customers(1)" />
+					<KanbanColumn title="Cliente em potencial" :column="1" />
 				</div>
 
 				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Contato realizado" :column="customers(1)" />
+					<KanbanColumn title="Contato realizado" :column="2" />
 				</div>
 
 				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Visita agendada" :column="customers(3)" />
+					<KanbanColumn title="Visita agendada" :column="3" />
 				</div>
 
 				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Negócio em andamento" :column="customers(4)" />
+					<KanbanColumn title="Negócio em andamento" :column="4" />
 				</div>
 
 				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Finalizados" :column="customers(5)" />
+					<KanbanColumn title="Finalizados" :column="5" />
 				</div>
 			</div>
 		</main>
@@ -46,24 +46,15 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { getModule } from 'vuex-module-decorators';
-import { Customers } from '../store/customers';
+import { ICustomer } from '../store/types';
 
 export default Vue.extend({
-	data() {
-		return {
-			myModule: new Customers(Customers)
-		}
-	},
-	methods: {
-		customers(column: number) {
-			return this.myModule.getCustomers.filter((value) => value.column === column);
+	computed: {
+		customers: {
+			get(): ICustomer[] {
+				return this.$store.getters.customerInfo;
+			},
 		},
-	},
-
-	created() {
-		this.myModule = getModule(Customers);
-		this.myModule.getUsers();
 	},
 });
 </script>

@@ -19,7 +19,7 @@
 				column.length
 			}}</span>
 		</div>
-		<Card :array="column" />
+		<Card :column="column" />
 	</div>
 </template>
 
@@ -29,7 +29,7 @@ import Vue from 'vue';
 export default Vue.extend({
 	props: {
 		title: String,
-		column: Array,
+		column: Number,
 	},
 });
 </script>
