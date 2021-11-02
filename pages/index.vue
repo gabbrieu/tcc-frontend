@@ -19,42 +19,66 @@
 			>
 				+ Novo cliente
 			</button>
-			<div class="flex flex-row">
-				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Cliente em potencial" :column="1" />
-				</div>
 
-				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Contato realizado" :column="2" />
-				</div>
-
-				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Visita agendada" :column="3" />
-				</div>
-
-				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Negócio em andamento" :column="4" />
-				</div>
-
-				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Finalizados" :column="5" />
-				</div>
-			</div>
+			<KanbanBoard
+				:first-column="firstColumn"
+				:second-column="secondColumn"
+				:third-column="thirdColumn"
+				:fourth-column="fourthColumn"
+				:fifth-column="fifthColumn"
+			/>
 		</main>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { ICustomer } from '../store/types';
+import { ICustomer } from '@/utils/types';
+import { IGetAllCustomersResponse } from '../store/types';
 
 export default Vue.extend({
-	computed: {
-		customers: {
-			get(): ICustomer[] {
-				return this.$store.getters.customerInfo;
-			},
-		},
+	data() {
+		return {
+			firstColumn: [] as ICustomer[],
+			secondColumn: [] as ICustomer[],
+			thirdColumn: [] as ICustomer[],
+			fourthColumn: [] as ICustomer[],
+			fifthColumn: [] as ICustomer[],
+		};
+	},
+
+	async created() {
+		const customers = await this.$axios.$get<IGetAllCustomersResponse>(
+			'http://localhost:3002/customers'
+		);
+
+		customers.data.forEach((c) => {
+			switch (c.column) {
+				case 1:
+					this.firstColumn.push(c);
+					break;
+
+				case 2:
+					this.secondColumn.push(c);
+					break;
+
+				case 3:
+					this.thirdColumn.push(c);
+					break;
+
+				case 4:
+					this.fourthColumn.push(c);
+					break;
+
+				case 5:
+					this.fifthColumn.push(c);
+					break;
+
+				default:
+					console.log(c);
+					break;
+			}
+		});
 	},
 });
 </script>
