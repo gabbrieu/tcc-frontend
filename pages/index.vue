@@ -34,7 +34,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { ICustomer } from '@/utils/types';
-import { IGetAllCustomersResponse } from '../store/types';
+import { IGetAllCustomersResponse } from '@/utils/types';
 
 export default Vue.extend({
 	data() {

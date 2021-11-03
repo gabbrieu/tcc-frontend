@@ -24,7 +24,7 @@
 				v-model="firstColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 'firstColumn')"
+				@add="onAdd($event, 1)"
 				@change="update"
 			>
 				<div
@@ -62,7 +62,7 @@
 				v-model="secondColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 'secondColumn')"
+				@add="onAdd($event, 2)"
 				@change="update"
 			>
 				<div
@@ -100,7 +100,7 @@
 				v-model="thirdColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 'thirdColumn')"
+				@add="onAdd($event, 3)"
 				@change="update"
 			>
 				<div
@@ -138,7 +138,7 @@
 				v-model="fourthColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 'fourthColumn')"
+				@add="onAdd($event, 4)"
 				@change="update"
 			>
 				<div
@@ -176,7 +176,7 @@
 				v-model="fifthColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 'fifthColumn')"
+				@add="onAdd($event, 5)"
 				@change="update"
 			>
 				<div
@@ -195,15 +195,16 @@
 <script lang="ts">
 import Vue from 'vue';
 import draggable from 'vuedraggable';
+import { ICustomer } from '../../utils/types';
 
 export default Vue.extend({
 	data() {
 		return {
-			firstColumnNew: this.firstColumn,
-			secondColumnNew: this.secondColumn,
-			thirdColumnNew: this.thirdColumn,
-			fourthColumnNew: this.fourthColumn,
-			fifthColumnNew: this.fifthColumn,
+			firstColumnNew: this.firstColumn as ICustomer[],
+			secondColumnNew: this.secondColumn as ICustomer[],
+			thirdColumnNew: this.thirdColumn as ICustomer[],
+			fourthColumnNew: this.fourthColumn as ICustomer[],
+			fifthColumnNew: this.fifthColumn as ICustomer[],
 		};
 	},
 
@@ -220,10 +221,10 @@ export default Vue.extend({
 	},
 
 	methods: {
-		async onAdd(event: any, column: string) {
+		async onAdd(event: any, column: number) {
 			const id: string = event.item.getAttribute('data-id');
 			try {
-				await this.$axios.$patch(`http:localhost:3002/customers/${id}`, {
+				await this.$axios.$patch(`http://localhost:3002/customers/${id}`, {
 					column,
 				});
 			} catch (error) {
@@ -231,8 +232,41 @@ export default Vue.extend({
 			}
 		},
 
-		update(c: any) {
-			console.log(c);
+		async update() {
+			this.firstColumnNew.map(
+				(customer, index) => (customer.order = index + 1)
+			);
+
+			this.secondColumnNew.map(
+				(customer, index) => (customer.order = index + 1)
+			);
+
+			this.thirdColumnNew.map(
+				(customer, index) => (customer.order = index + 1)
+			);
+
+			this.fourthColumnNew.map(
+				(customer, index) => (customer.order = index + 1)
+			);
+
+			this.fifthColumnNew.map(
+				(customer, index) => (customer.order = index + 1)
+			);
+
+			const customers = this.firstColumnNew.concat(
+				this.secondColumnNew,
+				this.thirdColumnNew,
+				this.fourthColumnNew,
+				this.fifthColumnNew
+			);
+
+			try {
+				await this.$axios.$put(`http://localhost:3002/customers/update-all`, {
+					customers,
+				});
+			} catch (error) {
+				console.log(error);
+			}
 		},
 	},
 });
