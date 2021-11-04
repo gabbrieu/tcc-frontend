@@ -21,11 +21,10 @@
 			</div>
 			<draggable
 				class="kanban-column"
-				v-model="firstColumnNew"
+				:list="firstColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 1)"
-				@change="update"
+				@end="update"
 			>
 				<div
 					class="bg-white pl-2 mt-2 ml-3 mr-3"
@@ -59,11 +58,10 @@
 			</div>
 			<draggable
 				class="kanban-column"
-				v-model="secondColumnNew"
+				:list="secondColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 2)"
-				@change="update"
+				@end="update"
 			>
 				<div
 					class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
@@ -97,11 +95,10 @@
 			</div>
 			<draggable
 				class="kanban-column"
-				v-model="thirdColumnNew"
+				:list="thirdColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 3)"
-				@change="update"
+				@end="update"
 			>
 				<div
 					class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
@@ -135,11 +132,10 @@
 			</div>
 			<draggable
 				class="kanban-column"
-				v-model="fourthColumnNew"
+				:list="fourthColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 4)"
-				@change="update"
+				@end="update"
 			>
 				<div
 					class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
@@ -173,11 +169,10 @@
 			</div>
 			<draggable
 				class="kanban-column"
-				v-model="fifthColumnNew"
+				:list="fifthColumnNew"
 				group="tasks"
 				animation="250"
-				@add="onAdd($event, 5)"
-				@change="update"
+				@end="update"
 			>
 				<div
 					class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
@@ -221,45 +216,33 @@ export default Vue.extend({
 	},
 
 	methods: {
-		async onAdd(event: any, column: number) {
-			const id: string = event.item.getAttribute('data-id');
-			try {
-				await this.$axios.$patch(`http://localhost:3002/customers/${id}`, {
-					column,
-				});
-			} catch (error) {
-				console.log(error);
-			}
-		},
-
 		async update() {
-			this.firstColumnNew.map(
-				(customer, index) => (customer.order = index + 1)
-			);
-
-			this.secondColumnNew.map(
-				(customer, index) => (customer.order = index + 1)
-			);
-
-			this.thirdColumnNew.map(
-				(customer, index) => (customer.order = index + 1)
-			);
-
-			this.fourthColumnNew.map(
-				(customer, index) => (customer.order = index + 1)
-			);
-
-			this.fifthColumnNew.map(
-				(customer, index) => (customer.order = index + 1)
-			);
-
+			this.firstColumnNew.map((v, i) => {
+				v.order = i + 1;
+				v.column = 1;
+			});
+			this.secondColumnNew.map((v, i) => {
+				v.order = i + 1;
+				v.column = 2;
+			});
+			this.thirdColumnNew.map((v, i) => {
+				v.order = i + 1;
+				v.column = 3;
+			});
+			this.fourthColumnNew.map((v, i) => {
+				v.order = i + 1;
+				v.column = 4;
+			});
+			this.fifthColumnNew.map((v, i) => {
+				v.order = i + 1;
+				v.column = 5;
+			});
 			const customers = this.firstColumnNew.concat(
 				this.secondColumnNew,
 				this.thirdColumnNew,
 				this.fourthColumnNew,
 				this.fifthColumnNew
 			);
-
 			try {
 				await this.$axios.$put(`http://localhost:3002/customers/update-all`, {
 					customers,
