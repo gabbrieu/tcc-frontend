@@ -16,9 +16,15 @@
 					pr-4
 					pl-4
 				"
+				@click="showCreateClientModal = true"
 			>
 				+ Novo cliente
 			</button>
+
+			<CreateClientModal
+				v-show="showCreateClientModal"
+				@close-modal="showCreateClientModal = false"
+			/>
 
 			<KanbanBoard
 				:first-column="firstColumn"
@@ -44,6 +50,7 @@ export default Vue.extend({
 			thirdColumn: [] as ICustomer[],
 			fourthColumn: [] as ICustomer[],
 			fifthColumn: [] as ICustomer[],
+			showCreateClientModal: false,
 		};
 	},
 
