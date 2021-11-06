@@ -27,12 +27,12 @@
 				@end="update"
 			>
 				<div
-					class="bg-white pl-2 mt-2 ml-3 mr-3"
+					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
 					v-for="customer in firstColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
 				>
-					{{ customer.name }}
+					<h4>{{ customer.name }}</h4>
 				</div>
 			</draggable>
 		</div>
@@ -64,12 +64,12 @@
 				@end="update"
 			>
 				<div
-					class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
+					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
 					v-for="customer in secondColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
 				>
-					{{ customer.name }}
+					<h4>{{ customer.name }}</h4>
 				</div>
 			</draggable>
 		</div>
@@ -101,7 +101,7 @@
 				@end="update"
 			>
 				<div
-					class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
+					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
 					v-for="customer in thirdColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
@@ -138,7 +138,7 @@
 				@end="update"
 			>
 				<div
-					class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
+					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
 					v-for="customer in fourthColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
@@ -175,7 +175,7 @@
 				@end="update"
 			>
 				<div
-					class="list-group-item bg-white pl-2 mt-2 ml-3 mr-3"
+					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
 					v-for="customer in fifthColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"

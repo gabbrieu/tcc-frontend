@@ -1,104 +1,156 @@
 <template>
 	<div class="modal-overlay" @click="$emit('close-modal')">
 		<div class="modal" @click.stop>
-			<form v-on:submit.prevent="sendClient">
-				<label for="name">Nome Completo*</label>
-				<input type="text" name="name" id="name" v-model="name" required />
-
-				<label for="cellPhone">Telefone*</label>
-				<input
-					type="text"
-					name="cellPhone"
-					id="cellPhone"
-					v-model="cellPhone"
-					required
-				/>
-
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email" v-model="email" />
-
-				<label for="document">CPF*</label>
-				<input
-					type="text"
-					name="document"
-					id="document"
-					v-model="document"
-					required
-				/>
-
-				<label for="birthDate">Data de Nascimento*</label>
-				<input
-					type="date"
-					name="birthDate"
-					id="birthDate"
-					v-model="birthDate"
-					required
-				/>
-
-				<p>Gênero*</p>
-				<select name="gender" v-model="gender">
-					<option disabled value="">Escolha um item</option>
-					<option value="MASCULINO">MASCULINO</option>
-					<option value="FEMININO">FEMININO</option>
-					<option value="NÃO INFORMADO">NÃO INFORMADO</option>
-				</select>
-
-				<label for="column">Etapa da Jornada*</label>
-				<input
-					type="text"
-					name="column"
-					id="column"
-					v-model="column"
-					required
-				/>
-
-				<label for="city">Cidade*</label>
-				<input type="text" name="city" id="city" v-model="city" required />
-
-				<label for="street">Rua*</label>
-				<input
-					type="text"
-					name="street"
-					id="street"
-					v-model="street"
-					required
-				/>
-
-				<label for="district">Bairro*</label>
-				<input
-					type="text"
-					name="district"
-					id="district"
-					v-model="district"
-					required
-				/>
-
-				<label for="houseNumber">Número*</label>
-				<input
-					type="text"
-					name="houseNumber"
-					id="houseNumber"
-					v-model="houseNumber"
-					required
-				/>
-
-				<label for="description">Descrição*</label>
-				<input
-					type="text"
-					name="description"
-					id="description"
-					v-model="description"
-					required
-				/>
-
-				<button type="submit">Enviar</button>
-				<div class="close" @click="$emit('close-modal')">
-					<img
-						class="w-6"
-						src="~/assets/close-icon.svg"
-						alt=""
-						@click="showCreateClientModal = false"
+			<h2 class="font-bold border-b border-light-gray pl-3 mb-4 text-lg">
+				Cadastro de cliente
+			</h2>
+			<form v-on:submit.prevent="sendClient" class="flex flex-row">
+				<div class="flex flex-col flex-1 ml-3 mr-3">
+					<label for="name">Nome Completo*</label>
+					<input
+						type="text"
+						name="name"
+						id="name"
+						v-model="name"
+						placeholder="Digite o nome completo do cliente"
+						required
 					/>
+
+					<label for="cellphone">Celular*</label>
+					<input
+						type="text"
+						name="cellphone"
+						id="cellphone"
+						v-model="cellphone"
+						placeholder="Digite o celular do cliente"
+						v-mask="'(##) #####-####'"
+						required
+					/>
+
+					<label for="email">Email</label>
+					<input
+						type="email"
+						name="email"
+						id="email"
+						v-model="email"
+						placeholder="Digite o email do cliente"
+					/>
+
+					<label for="document">CPF*</label>
+					<input
+						type="text"
+						name="document"
+						id="document"
+						v-model="document"
+						v-mask="'###.###.###-##'"
+						placeholder="Digite o CPF do cliente"
+						required
+					/>
+
+					<label for="birthDate">Data de Nascimento*</label>
+					<input
+						class="cursor-pointer"
+						type="date"
+						name="birthDate"
+						id="birthDate"
+						v-model="birthDate"
+						required
+					/>
+
+					<p>Gênero*</p>
+					<select class="cursor-pointer" name="gender" v-model="gender">
+						<option disabled value="">Escolha um item</option>
+						<option value="MASCULINO">MASCULINO</option>
+						<option value="FEMININO">FEMININO</option>
+						<option value="NÃO INFORMADO">NÃO INFORMADO</option>
+					</select>
+
+					<p>Etapa da Jornada*</p>
+					<select class="cursor-pointer" name="column" v-model="column">
+						<option disabled value="">Escolha um item</option>
+						<option :value="1">Cliente em potencial</option>
+						<option :value="2">Contato realizado</option>
+						<option :value="3">Visita agendada</option>
+						<option :value="4">Negócio em andamento</option>
+						<option :value="5">Finalizados</option>
+					</select>
+
+					<label for="description">Descrição*</label>
+					<textarea
+						class="resize-none"
+						type="text"
+						name="description"
+						id="description"
+						v-model="description"
+						placeholder="Informações a mais sobre o cliente"
+						required
+					/>
+				</div>
+
+				<div class="flex flex-col flex-1 pl-3 pr-3 border-l border-light-gray">
+					<label for="city">Cidade*</label>
+					<input
+						type="text"
+						name="city"
+						id="city"
+						v-model="city"
+						placeholder="Digite a cidade do cliente"
+						required
+					/>
+
+					<label for="street">Rua*</label>
+					<input
+						type="text"
+						name="street"
+						id="street"
+						v-model="street"
+						placeholder="Digite a rua do cliente"
+						required
+					/>
+
+					<label for="district">Bairro*</label>
+					<input
+						type="text"
+						name="district"
+						id="district"
+						v-model="district"
+						placeholder="Digite o bairro do cliente"
+						required
+					/>
+
+					<label for="houseNumber">Número*</label>
+					<input
+						type="text"
+						name="houseNumber"
+						id="houseNumber"
+						v-model="houseNumber"
+						placeholder="Digite o número da casa do cliente"
+						required
+					/>
+
+					<button
+						type="submit"
+						class="
+							mt-auto
+							p-2
+							border-2 border-blue
+							rounded-md
+							text-blue
+							font-bold
+							w-4/12
+							ml-auto
+						"
+					>
+						Enviar
+					</button>
+					<!-- <div class="close" @click="$emit('close-modal')">
+						<img
+							class="w-6"
+							src="~/assets/close-icon.svg"
+							alt=""
+							@click="showCreateClientModal = false"
+						/>
+					</div> -->
 				</div>
 			</form>
 		</div>
@@ -108,11 +160,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import { GenderEnum } from '../../utils/types';
+import VueMask from 'v-mask';
+Vue.use(VueMask);
+
 export default Vue.extend({
 	data() {
 		return {
 			name: '',
-			cellPhone: '',
+			cellphone: '',
 			email: '',
 			document: '',
 			birthDate: '',
@@ -121,29 +176,38 @@ export default Vue.extend({
 			city: '',
 			street: '',
 			district: '',
-			houseNumber: 0,
+			houseNumber: '',
 			description: '',
 		};
 	},
 
 	methods: {
-		sendClient() {
+		async sendClient() {
+			const documentWithoutPunctuation = this.document.replace(/[^0-9]/g, '');
+			const cellPhoneWithoutPunctuation = this.cellphone.replace(/[^0-9]/g, '');
+
 			try {
-				this.$axios.$post(`http://localhost:3002/customer`, {
-					name: this.name,
-					email: this.email,
-					document: this.document,
-					district: this.district,
-					description: this.description,
-					gender: this.gender,
-					houseNumber: this.houseNumber,
-					status: true,
-					street: this.street,
-					birthDate: this.birthDate,
-					cellPhone: this.cellPhone,
-					city: this.city,
-					column: this.column,
-				});
+				const response = await this.$axios.post(
+					`http://localhost:3002/customers`,
+					{
+						name: this.name,
+						email: this.email,
+						document: documentWithoutPunctuation,
+						district: this.district,
+						description: this.description,
+						gender: this.gender,
+						houseNumber: this.houseNumber,
+						status: true,
+						street: this.street,
+						birthDate: this.birthDate,
+						cellphone: cellPhoneWithoutPunctuation,
+						city: this.city,
+						column: this.column,
+					}
+				);
+
+				if (response.status === 201) {
+				}
 			} catch (error) {
 				console.log(error);
 			}
@@ -162,20 +226,57 @@ export default Vue.extend({
 	display: flex;
 	justify-content: center;
 	background-color: #000000da;
+	align-items: center;
+	font-family: 'Roboto', sans-serif;
 }
 
 .modal {
-	text-align: center;
 	background-color: white;
-	height: 500px;
-	width: 500px;
-	margin-top: 10%;
-	padding: 60px 0;
-	border-radius: 20px;
+	width: 700px;
+	border-radius: 5px;
+	padding: 0.625rem 0;
 }
 
 .close {
-	margin: 10% 0 0 16px;
+	margin: 50% 0 0 1rem;
 	cursor: pointer;
+}
+
+label,
+p,
+option,
+select {
+	font-size: 0.875rem;
+}
+
+label,
+p {
+	color: #757373;
+}
+
+input,
+textarea {
+	padding-left: 0.313rem;
+}
+
+input,
+select {
+	margin-bottom: 0.625rem;
+}
+
+input,
+textarea,
+select {
+	border: #cbd5e0 1px solid;
+	border-radius: 3px;
+}
+
+input,
+select {
+	height: 2.188rem;
+}
+
+h2 {
+	padding-bottom: 0.625rem;
 }
 </style>

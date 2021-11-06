@@ -16,6 +16,7 @@
 		"core-js": "^3.15.1",
 		"nuxt": "^2.15.7",
 		"tslib": "^2.3.1",
+		"v-mask": "^2.3.0",
 		"vuedraggable": "^2.24.3",
 		"vuex-module-decorators": "^1.0.1"
 	},

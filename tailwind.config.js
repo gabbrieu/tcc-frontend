@@ -16,6 +16,8 @@ module.exports = {
 			'blue-twitter': '#2aa9e0',
 			'kanban-column-title': '#47484F',
 			'border-color': '#E7E9FF',
+			'light-gray': '#CBD5E0',
+			gray: '#757373',
 		},
 	},
 	variants: {},
@@ -33,4 +35,4 @@ module.exports = {
 			'nuxt.config.ts',
 		],
 	},
-}
+};
