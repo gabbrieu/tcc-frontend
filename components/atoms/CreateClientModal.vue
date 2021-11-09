@@ -1,9 +1,17 @@
 <template>
 	<div class="modal-overlay" @click="$emit('close-modal')">
 		<div class="modal" @click.stop>
-			<h2 class="font-bold border-b border-light-gray pl-3 mb-4 text-lg">
-				Cadastro de cliente
-			</h2>
+			<header class="flex justify-between border-b border-light-gray mb-4">
+				<h2 class="font-bold pl-3 text-lg">Cadastro de cliente</h2>
+				<div class="cursor-pointer mr-3" @click="$emit('close-modal')">
+					<img
+						class="w-6"
+						src="~/assets/svg.svg"
+						alt=""
+						@click="showCreateClientModal = false"
+					/>
+				</div>
+			</header>
 			<form v-on:submit.prevent="sendClient" class="flex flex-row">
 				<div class="flex flex-col flex-1 ml-3 mr-3">
 					<label for="name">Nome Completo*</label>
@@ -128,6 +136,16 @@
 						required
 					/>
 
+					<p>Prioridade*</p>
+					<select class="cursor-pointer" name="priority" v-model="priority">
+						<option disabled value="">Escolha um item</option>
+						<option value="VERY_LOW">Muito Baixa</option>
+						<option value="LOW">Baixa</option>
+						<option value="MEDIUM">Média</option>
+						<option value="HIGH">Alta</option>
+						<option value="URGENT">Urgente</option>
+					</select>
+
 					<button
 						type="submit"
 						class="
@@ -144,14 +162,6 @@
 						Enviar
 					</button>
 				</div>
-				<!-- <div class="close flex flex-col mt-60" @click="$emit('close-modal')">
-					<img
-						class="w-6"
-						src="~/assets/close-icon.svg"
-						alt=""
-						@click="showCreateClientModal = false"
-					/>
-				</div> -->
 			</form>
 		</div>
 	</div>
@@ -159,7 +169,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { GenderEnum } from '../../utils/types';
+import { GenderEnum, PriorityEnum } from '../../utils/types';
 import VueMask from 'v-mask';
 Vue.use(VueMask);
 
@@ -178,6 +188,7 @@ export default Vue.extend({
 			district: '',
 			houseNumber: '',
 			description: '',
+			priority: PriorityEnum.MEDIUM,
 		};
 	},
 
@@ -203,10 +214,24 @@ export default Vue.extend({
 						cellphone: cellPhoneWithoutPunctuation,
 						city: this.city,
 						column: this.column,
+						priority: this.priority,
 					}
 				);
 
 				if (response.status === 201) {
+					this.name = '';
+					this.cellphone = '';
+					this.email = '';
+					this.document = '';
+					this.birthDate = '';
+					this.gender = GenderEnum.NÃO_INFORMADO;
+					this.column = 1;
+					this.city = '';
+					this.street = '';
+					this.district = '';
+					this.houseNumber = '';
+					this.description = '';
+					this.priority = PriorityEnum.MEDIUM;
 					this.$emit('close-modal');
 				}
 			} catch (error) {
@@ -236,11 +261,6 @@ export default Vue.extend({
 	width: 700px;
 	border-radius: 5px;
 	padding: 0.625rem 0;
-}
-
-.close {
-	margin: 50% 0 0 1rem;
-	cursor: pointer;
 }
 
 label,

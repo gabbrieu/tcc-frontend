@@ -35,7 +35,7 @@
 						mr-3
 						h-48
 						rounded-xl
-						border border-border-color
+						border-2 border-border-color
 					"
 					v-for="customer in firstColumnNew"
 					:key="customer.id"
@@ -44,7 +44,17 @@
 					<div class="pl-2 pr-2 pb-2">
 						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
-						<p class="mt-12 text-sm">{{ customer.description }}</p>
+						<p
+							class="
+								mt-12
+								h-10
+								text-sm
+								overflow-ellipsis overflow-hidden
+								descricao
+							"
+						>
+							{{ customer.description }}
+						</p>
 
 						<div
 							v-if="customer.priority === 'VERY_LOW'"
@@ -115,7 +125,7 @@
 						mr-3
 						h-48
 						rounded-xl
-						border border-border-color
+						border-2 border-border-color
 					"
 					v-for="customer in secondColumnNew"
 					:key="customer.id"
@@ -124,7 +134,17 @@
 					<div class="pl-2 pr-2 pb-2">
 						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
-						<p class="mt-12 text-sm">{{ customer.description }}</p>
+						<p
+							class="
+								mt-12
+								h-10
+								text-sm
+								overflow-ellipsis overflow-hidden
+								descricao
+							"
+						>
+							{{ customer.description }}
+						</p>
 
 						<div
 							v-if="customer.priority === 'VERY_LOW'"
@@ -195,7 +215,7 @@
 						mr-3
 						h-48
 						rounded-xl
-						border border-border-color
+						border-2 border-border-color
 					"
 					v-for="customer in thirdColumnNew"
 					:key="customer.id"
@@ -204,7 +224,17 @@
 					<div class="pl-2 pr-2 pb-2">
 						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
-						<p class="mt-12 text-sm">{{ customer.description }}</p>
+						<p
+							class="
+								mt-12
+								h-10
+								text-sm
+								overflow-ellipsis overflow-hidden
+								descricao
+							"
+						>
+							{{ customer.description }}
+						</p>
 
 						<div
 							v-if="customer.priority === 'VERY_LOW'"
@@ -275,7 +305,7 @@
 						mr-3
 						h-48
 						rounded-xl
-						border border-border-color
+						border-2 border-border-color
 					"
 					v-for="customer in fourthColumnNew"
 					:key="customer.id"
@@ -284,7 +314,17 @@
 					<div class="pl-2 pr-2 pb-2">
 						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
-						<p class="mt-12 text-sm">{{ customer.description }}</p>
+						<p
+							class="
+								mt-12
+								h-10
+								text-sm
+								overflow-ellipsis overflow-hidden
+								descricao
+							"
+						>
+							{{ customer.description }}
+						</p>
 
 						<div
 							v-if="customer.priority === 'VERY_LOW'"
@@ -355,7 +395,7 @@
 						mr-3
 						h-48
 						rounded-xl
-						border border-border-color
+						border-2 border-border-color
 					"
 					v-for="customer in fifthColumnNew"
 					:key="customer.id"
@@ -364,7 +404,17 @@
 					<div class="pl-2 pr-2 pb-2">
 						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
-						<p class="mt-12 text-sm">{{ customer.description }}</p>
+						<p
+							class="
+								mt-12
+								h-10
+								text-sm
+								overflow-ellipsis overflow-hidden
+								descricao
+							"
+						>
+							{{ customer.description }}
+						</p>
 
 						<div
 							v-if="customer.priority === 'VERY_LOW'"
@@ -481,5 +531,12 @@ export default Vue.extend({
 
 .kanban-column {
 	min-height: 500px;
+}
+
+.descricao {
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 </style>
