@@ -36,6 +36,7 @@
 						h-48
 						rounded-xl
 						border-2 border-border-color
+						grabbable
 					"
 					v-for="customer in firstColumnNew"
 					:key="customer.id"
@@ -45,9 +46,10 @@
 						<div class="flex justify-between">
 							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 							<img
-								class="w-4 mr-2"
+								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
+								@click="showEditCardModal = true"
 							/>
 						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
@@ -133,6 +135,7 @@
 						h-48
 						rounded-xl
 						border-2 border-border-color
+						grabbable
 					"
 					v-for="customer in secondColumnNew"
 					:key="customer.id"
@@ -142,9 +145,10 @@
 						<div class="flex justify-between">
 							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 							<img
-								class="w-4 mr-2"
+								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
+								@click="showEditCardModal = true"
 							/>
 						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
@@ -230,6 +234,7 @@
 						h-48
 						rounded-xl
 						border-2 border-border-color
+						grabbable
 					"
 					v-for="customer in thirdColumnNew"
 					:key="customer.id"
@@ -239,9 +244,10 @@
 						<div class="flex justify-between">
 							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 							<img
-								class="w-4 mr-2"
+								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
+								@click="showEditCardModal = true"
 							/>
 						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
@@ -327,6 +333,7 @@
 						h-48
 						rounded-xl
 						border-2 border-border-color
+						grabbable
 					"
 					v-for="customer in fourthColumnNew"
 					:key="customer.id"
@@ -336,9 +343,10 @@
 						<div class="flex justify-between">
 							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 							<img
-								class="w-4 mr-2"
+								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
+								@click="showEditCardModal = true"
 							/>
 						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
@@ -424,6 +432,7 @@
 						h-48
 						rounded-xl
 						border-2 border-border-color
+						grabbable
 					"
 					v-for="customer in fifthColumnNew"
 					:key="customer.id"
@@ -433,9 +442,10 @@
 						<div class="flex justify-between">
 							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
 							<img
-								class="w-4 mr-2"
+								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
+								@click="showEditCardModal = true"
 							/>
 						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
@@ -500,6 +510,7 @@ export default Vue.extend({
 			thirdColumnNew: this.thirdColumn as ICustomer[],
 			fourthColumnNew: this.fourthColumn as ICustomer[],
 			fifthColumnNew: this.fifthColumn as ICustomer[],
+			showEditCardModal: false,
 		};
 	},
 
@@ -573,5 +584,19 @@ export default Vue.extend({
 	-webkit-line-clamp: 2; /* number of lines to show */
 	line-clamp: 2;
 	-webkit-box-orient: vertical;
+}
+
+.grabbable {
+	cursor: move; /* fallback if grab cursor is unsupported */
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
+}
+
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active {
+	cursor: grabbing;
+	cursor: -moz-grabbing;
+	cursor: -webkit-grabbing;
 }
 </style>
