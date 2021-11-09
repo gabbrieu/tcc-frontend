@@ -11,7 +11,7 @@
 						type="text"
 						name="name"
 						id="name"
-						v-model="name"
+						v-model.trim="name"
 						placeholder="Digite o nome completo do cliente"
 						required
 					/>
@@ -21,7 +21,7 @@
 						type="text"
 						name="cellphone"
 						id="cellphone"
-						v-model="cellphone"
+						v-model.trim="cellphone"
 						placeholder="Digite o celular do cliente"
 						v-mask="'(##) #####-####'"
 						required
@@ -32,7 +32,7 @@
 						type="email"
 						name="email"
 						id="email"
-						v-model="email"
+						v-model.trim="email"
 						placeholder="Digite o email do cliente"
 					/>
 
@@ -41,7 +41,7 @@
 						type="text"
 						name="document"
 						id="document"
-						v-model="document"
+						v-model.trim="document"
 						v-mask="'###.###.###-##'"
 						placeholder="Digite o CPF do cliente"
 						required
@@ -60,9 +60,9 @@
 					<p>Gênero*</p>
 					<select class="cursor-pointer" name="gender" v-model="gender">
 						<option disabled value="">Escolha um item</option>
-						<option value="MASCULINO">MASCULINO</option>
-						<option value="FEMININO">FEMININO</option>
-						<option value="NÃO INFORMADO">NÃO INFORMADO</option>
+						<option value="MASCULINO">Masculino</option>
+						<option value="FEMININO">Feminino</option>
+						<option value="NÃO INFORMADO">Não informado</option>
 					</select>
 
 					<p>Etapa da Jornada*</p>
@@ -81,7 +81,7 @@
 						type="text"
 						name="description"
 						id="description"
-						v-model="description"
+						v-model.trim="description"
 						placeholder="Informações a mais sobre o cliente"
 						required
 					/>
@@ -93,7 +93,7 @@
 						type="text"
 						name="city"
 						id="city"
-						v-model="city"
+						v-model.trim="city"
 						placeholder="Digite a cidade do cliente"
 						required
 					/>
@@ -103,7 +103,7 @@
 						type="text"
 						name="street"
 						id="street"
-						v-model="street"
+						v-model.trim="street"
 						placeholder="Digite a rua do cliente"
 						required
 					/>
@@ -113,7 +113,7 @@
 						type="text"
 						name="district"
 						id="district"
-						v-model="district"
+						v-model.trim="district"
 						placeholder="Digite o bairro do cliente"
 						required
 					/>
@@ -123,7 +123,7 @@
 						type="text"
 						name="houseNumber"
 						id="houseNumber"
-						v-model="houseNumber"
+						v-model.trim="houseNumber"
 						placeholder="Digite o número da casa do cliente"
 						required
 					/>
@@ -143,15 +143,15 @@
 					>
 						Enviar
 					</button>
-					<!-- <div class="close" @click="$emit('close-modal')">
-						<img
-							class="w-6"
-							src="~/assets/close-icon.svg"
-							alt=""
-							@click="showCreateClientModal = false"
-						/>
-					</div> -->
 				</div>
+				<!-- <div class="close flex flex-col mt-60" @click="$emit('close-modal')">
+					<img
+						class="w-6"
+						src="~/assets/close-icon.svg"
+						alt=""
+						@click="showCreateClientModal = false"
+					/>
+				</div> -->
 			</form>
 		</div>
 	</div>
@@ -207,6 +207,7 @@ export default Vue.extend({
 				);
 
 				if (response.status === 201) {
+					this.$emit('close-modal');
 				}
 			} catch (error) {
 				console.log(error);

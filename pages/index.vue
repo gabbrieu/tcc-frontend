@@ -23,16 +23,18 @@
 
 			<CreateClientModal
 				v-show="showCreateClientModal"
-				@close-modal="showCreateClientModal = false"
+				@close-modal="getCustomersInDatabase"
 			/>
 
-			<KanbanBoard
-				:first-column="firstColumn"
-				:second-column="secondColumn"
-				:third-column="thirdColumn"
-				:fourth-column="fourthColumn"
-				:fifth-column="fifthColumn"
-			/>
+			<div :key="index">
+				<KanbanBoard
+					:first-column="firstColumn"
+					:second-column="secondColumn"
+					:third-column="thirdColumn"
+					:fourth-column="fourthColumn"
+					:fifth-column="fifthColumn"
+				/>
+			</div>
 		</main>
 	</div>
 </template>
@@ -51,41 +53,56 @@ export default Vue.extend({
 			fourthColumn: [] as ICustomer[],
 			fifthColumn: [] as ICustomer[],
 			showCreateClientModal: false,
+			index: 0,
 		};
 	},
 
 	async created() {
-		const customers = await this.$axios.$get<IGetAllCustomersResponse>(
-			'http://localhost:3002/customers'
-		);
+		await this.getCustomersInDatabase();
+	},
 
-		customers.data.forEach((c) => {
-			switch (c.column) {
-				case 1:
-					this.firstColumn.push(c);
-					break;
+	methods: {
+		async getCustomersInDatabase() {
+			this.showCreateClientModal = false;
+			this.index += 1;
+			this.firstColumn = [];
+			this.secondColumn = [];
+			this.thirdColumn = [];
+			this.fourthColumn = [];
+			this.fifthColumn = [];
 
-				case 2:
-					this.secondColumn.push(c);
-					break;
+			const customers = await this.$axios.$get<IGetAllCustomersResponse>(
+				'http://localhost:3002/customers'
+			);
 
-				case 3:
-					this.thirdColumn.push(c);
-					break;
+			customers.data.forEach((c) => {
+				switch (c.column) {
+					case 1:
+						this.firstColumn.push(c);
+						break;
 
-				case 4:
-					this.fourthColumn.push(c);
-					break;
+					case 2:
+						this.secondColumn.push(c);
+						break;
 
-				case 5:
-					this.fifthColumn.push(c);
-					break;
+					case 3:
+						this.thirdColumn.push(c);
+						break;
 
-				default:
-					console.log(c);
-					break;
-			}
-		});
+					case 4:
+						this.fourthColumn.push(c);
+						break;
+
+					case 5:
+						this.fifthColumn.push(c);
+						break;
+
+					default:
+						console.log(c);
+						break;
+				}
+			});
+		},
 	},
 });
 </script>
