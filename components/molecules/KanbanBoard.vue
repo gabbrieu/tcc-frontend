@@ -42,7 +42,14 @@
 					:data-id="customer.id"
 				>
 					<div class="pl-2 pr-2 pb-2">
-						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<div class="flex justify-between">
+							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<img
+								class="w-4 mr-2"
+								src="~/assets/three-dots.svg"
+								alt="Botão para opção"
+							/>
+						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
 						<p
 							class="
@@ -132,7 +139,14 @@
 					:data-id="customer.id"
 				>
 					<div class="pl-2 pr-2 pb-2">
-						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<div class="flex justify-between">
+							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<img
+								class="w-4 mr-2"
+								src="~/assets/three-dots.svg"
+								alt="Botão para opção"
+							/>
+						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
 						<p
 							class="
@@ -222,7 +236,14 @@
 					:data-id="customer.id"
 				>
 					<div class="pl-2 pr-2 pb-2">
-						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<div class="flex justify-between">
+							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<img
+								class="w-4 mr-2"
+								src="~/assets/three-dots.svg"
+								alt="Botão para opção"
+							/>
+						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
 						<p
 							class="
@@ -312,7 +333,14 @@
 					:data-id="customer.id"
 				>
 					<div class="pl-2 pr-2 pb-2">
-						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<div class="flex justify-between">
+							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<img
+								class="w-4 mr-2"
+								src="~/assets/three-dots.svg"
+								alt="Botão para opção"
+							/>
+						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
 						<p
 							class="
@@ -402,7 +430,14 @@
 					:data-id="customer.id"
 				>
 					<div class="pl-2 pr-2 pb-2">
-						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<div class="flex justify-between">
+							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<img
+								class="w-4 mr-2"
+								src="~/assets/three-dots.svg"
+								alt="Botão para opção"
+							/>
+						</div>
 						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
 						<p
 							class="

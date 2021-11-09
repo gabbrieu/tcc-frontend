@@ -5,7 +5,7 @@
 				<h2 class="font-bold pl-3 text-lg">Cadastro de cliente</h2>
 				<div class="cursor-pointer mr-3" @click="$emit('close-modal')">
 					<img
-						class="w-6"
+						class="w-3 mt-2"
 						src="~/assets/close-icon.svg"
 						alt=""
 						@click="showCreateClientModal = false"
