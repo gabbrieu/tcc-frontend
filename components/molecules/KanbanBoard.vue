@@ -27,12 +27,55 @@
 				@end="update"
 			>
 				<div
-					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
+					class="
+						bg-white
+						pl-2
+						mt-2
+						ml-3
+						mr-3
+						h-48
+						rounded-xl
+						border border-border-color
+					"
 					v-for="customer in firstColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
 				>
-					<h4>{{ customer.name }}</h4>
+					<div class="pl-2 pr-2 pb-2">
+						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p class="mt-12 text-sm">{{ customer.description }}</p>
+
+						<div
+							v-if="customer.priority === 'VERY_LOW'"
+							class="mt-4 w-4 h-4 bg-priority-very-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'LOW'"
+							class="mt-4 w-4 h-4 bg-priority-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'MEDIUM'"
+							class="mt-4 w-4 h-4 bg-priority-medium"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'HIGH'"
+							class="mt-4 w-4 h-4 bg-priority-high"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'URGENT'"
+							class="mt-4 w-4 h-4 bg-priority-urgent"
+							id="circulo"
+						></div>
+					</div>
 				</div>
 			</draggable>
 		</div>
@@ -64,12 +107,55 @@
 				@end="update"
 			>
 				<div
-					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
+					class="
+						bg-white
+						pl-2
+						mt-2
+						ml-3
+						mr-3
+						h-48
+						rounded-xl
+						border border-border-color
+					"
 					v-for="customer in secondColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
 				>
-					<h4>{{ customer.name }}</h4>
+					<div class="pl-2 pr-2 pb-2">
+						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p class="mt-12 text-sm">{{ customer.description }}</p>
+
+						<div
+							v-if="customer.priority === 'VERY_LOW'"
+							class="mt-4 w-4 h-4 bg-priority-very-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'LOW'"
+							class="mt-4 w-4 h-4 bg-priority-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'MEDIUM'"
+							class="mt-4 w-4 h-4 bg-priority-medium"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'HIGH'"
+							class="mt-4 w-4 h-4 bg-priority-high"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'URGENT'"
+							class="mt-4 w-4 h-4 bg-priority-urgent"
+							id="circulo"
+						></div>
+					</div>
 				</div>
 			</draggable>
 		</div>
@@ -101,12 +187,55 @@
 				@end="update"
 			>
 				<div
-					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
+					class="
+						bg-white
+						pl-2
+						mt-2
+						ml-3
+						mr-3
+						h-48
+						rounded-xl
+						border border-border-color
+					"
 					v-for="customer in thirdColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
 				>
-					{{ customer.name }}
+					<div class="pl-2 pr-2 pb-2">
+						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p class="mt-12 text-sm">{{ customer.description }}</p>
+
+						<div
+							v-if="customer.priority === 'VERY_LOW'"
+							class="mt-4 w-4 h-4 bg-priority-very-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'LOW'"
+							class="mt-4 w-4 h-4 bg-priority-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'MEDIUM'"
+							class="mt-4 w-4 h-4 bg-priority-medium"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'HIGH'"
+							class="mt-4 w-4 h-4 bg-priority-high"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'URGENT'"
+							class="mt-4 w-4 h-4 bg-priority-urgent"
+							id="circulo"
+						></div>
+					</div>
 				</div>
 			</draggable>
 		</div>
@@ -138,12 +267,55 @@
 				@end="update"
 			>
 				<div
-					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
+					class="
+						bg-white
+						pl-2
+						mt-2
+						ml-3
+						mr-3
+						h-48
+						rounded-xl
+						border border-border-color
+					"
 					v-for="customer in fourthColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
 				>
-					{{ customer.name }}
+					<div class="pl-2 pr-2 pb-2">
+						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p class="mt-12 text-sm">{{ customer.description }}</p>
+
+						<div
+							v-if="customer.priority === 'VERY_LOW'"
+							class="mt-4 w-4 h-4 bg-priority-very-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'LOW'"
+							class="mt-4 w-4 h-4 bg-priority-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'MEDIUM'"
+							class="mt-4 w-4 h-4 bg-priority-medium"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'HIGH'"
+							class="mt-4 w-4 h-4 bg-priority-high"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'URGENT'"
+							class="mt-4 w-4 h-4 bg-priority-urgent"
+							id="circulo"
+						></div>
+					</div>
 				</div>
 			</draggable>
 		</div>
@@ -175,12 +347,55 @@
 				@end="update"
 			>
 				<div
-					class="bg-white pl-2 mt-2 ml-3 mr-3 h-48 rounded-xl"
+					class="
+						bg-white
+						pl-2
+						mt-2
+						ml-3
+						mr-3
+						h-48
+						rounded-xl
+						border border-border-color
+					"
 					v-for="customer in fifthColumnNew"
 					:key="customer.id"
 					:data-id="customer.id"
 				>
-					{{ customer.name }}
+					<div class="pl-2 pr-2 pb-2">
+						<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p class="mt-12 text-sm">{{ customer.description }}</p>
+
+						<div
+							v-if="customer.priority === 'VERY_LOW'"
+							class="mt-4 w-4 h-4 bg-priority-very-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'LOW'"
+							class="mt-4 w-4 h-4 bg-priority-low"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'MEDIUM'"
+							class="mt-4 w-4 h-4 bg-priority-medium"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'HIGH'"
+							class="mt-4 w-4 h-4 bg-priority-high"
+							id="circulo"
+						></div>
+
+						<div
+							v-else-if="customer.priority === 'URGENT'"
+							class="mt-4 w-4 h-4 bg-priority-urgent"
+							id="circulo"
+						></div>
+					</div>
 				</div>
 			</draggable>
 		</div>
@@ -256,6 +471,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+#circulo {
+	border-radius: 50%;
+}
+
 .column-kanban-weight {
 	font-weight: 650;
 }
