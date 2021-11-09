@@ -6,7 +6,7 @@
 				<div class="cursor-pointer mr-3" @click="$emit('close-modal')">
 					<img
 						class="w-6"
-						src="~/assets/svg.svg"
+						src="~/assets/close-icon.svg"
 						alt=""
 						@click="showCreateClientModal = false"
 					/>
