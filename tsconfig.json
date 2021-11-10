@@ -15,7 +15,9 @@
 			"~/*": ["./*"],
 			"@/*": ["./*"]
 		},
-		"types": ["@nuxt/types", "@nuxtjs/axios", "@types/node"]
+		"types": ["@nuxt/types", "@nuxtjs/axios", "@types/node"],
+		"importHelpers": true,
+		"noImplicitAny": false
 	},
 	"exclude": ["node_modules", ".nuxt", "dist"]
 }

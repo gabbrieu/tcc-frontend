@@ -16,35 +16,24 @@
 					pr-4
 					pl-4
 				"
+				@click="showCreateClientModal = true"
 			>
 				+ Novo cliente
 			</button>
-			<div class="flex flex-row">
-				<div class="flex flex-col flex-1">
-					<KanbanColumn
-						title="Cliente em potencial"
-						:column="potentialClient"
-					/>
-				</div>
 
-				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Contato realizado" :column="contactMade" />
-				</div>
+			<CreateClientModal
+				v-show="showCreateClientModal"
+				@close-modal="getCustomersInDatabase"
+			/>
 
-				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Visita agendada" :column="scheduledVisit" />
-				</div>
-
-				<div class="flex flex-col flex-1">
-					<KanbanColumn
-						title="Negócio em andamento"
-						:column="businessInProgress"
-					/>
-				</div>
-
-				<div class="flex flex-col flex-1">
-					<KanbanColumn title="Finalizados" :column="done" />
-				</div>
+			<div :key="index">
+				<KanbanBoard
+					:first-column="firstColumn"
+					:second-column="secondColumn"
+					:third-column="thirdColumn"
+					:fourth-column="fourthColumn"
+					:fifth-column="fifthColumn"
+				/>
 			</div>
 		</main>
 	</div>
@@ -52,47 +41,68 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { IGetAllCustomersResponse } from '~/types/customer.types';
+import { ICustomer } from '@/utils/types';
+import { IGetAllCustomersResponse } from '@/utils/types';
 
 export default Vue.extend({
-	async created() {
-		try {
-			const customers: IGetAllCustomersResponse = await this.$axios.$get(
-				'http://127.0.0.1:3002/customers'
-			);
-			console.log(customers);
-		} catch (error) {
-			console.log(error);
-		}
-	},
-
 	data() {
 		return {
-			newTasks: '',
-			potentialClient: [
-				{ name: 'Cliente em potencial 1' },
-				{ name: 'Cliente em potencial 2' },
-				{ name: 'Cliente em potencial 3' },
-				{ name: 'Cliente em potencial 4' },
-			],
-			contactMade: [
-				{ name: 'Contato realizado 1' },
-				{ name: 'Contato realizado 2' },
-				{ name: 'Contato realizado 3' },
-				{ name: 'Contato realizado 4' },
-				{ name: 'Contato realizado 5' },
-			],
-			scheduledVisit: [{ name: 'Visita agendada 1' }],
-			businessInProgress: [
-				{ name: 'Negócio em andamento 1' },
-				{ name: 'Negócio em andamento 2' },
-			],
-			done: [
-				{ name: 'Finalizados 1' },
-				{ name: 'Finalizados 2' },
-				{ name: 'Finalizados 3' },
-			],
+			firstColumn: [] as ICustomer[],
+			secondColumn: [] as ICustomer[],
+			thirdColumn: [] as ICustomer[],
+			fourthColumn: [] as ICustomer[],
+			fifthColumn: [] as ICustomer[],
+			showCreateClientModal: false,
+			index: 0,
 		};
+	},
+
+	async created() {
+		await this.getCustomersInDatabase();
+	},
+
+	methods: {
+		async getCustomersInDatabase() {
+			this.showCreateClientModal = false;
+			this.index += 1;
+			this.firstColumn = [];
+			this.secondColumn = [];
+			this.thirdColumn = [];
+			this.fourthColumn = [];
+			this.fifthColumn = [];
+
+			const customers = await this.$axios.$get<IGetAllCustomersResponse>(
+				`${this.$config.baseURL}/customers`
+			);
+
+			customers.data.forEach((c) => {
+				switch (c.column) {
+					case 1:
+						this.firstColumn.push(c);
+						break;
+
+					case 2:
+						this.secondColumn.push(c);
+						break;
+
+					case 3:
+						this.thirdColumn.push(c);
+						break;
+
+					case 4:
+						this.fourthColumn.push(c);
+						break;
+
+					case 5:
+						this.fifthColumn.push(c);
+						break;
+
+					default:
+						console.log(c);
+						break;
+				}
+			});
+		},
 	},
 });
 </script>
