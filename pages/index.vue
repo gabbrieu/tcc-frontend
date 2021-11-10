@@ -72,7 +72,7 @@ export default Vue.extend({
 			this.fifthColumn = [];
 
 			const customers = await this.$axios.$get<IGetAllCustomersResponse>(
-				'http://localhost:3002/customers'
+				`${this.$config.baseURL}/customers`
 			);
 
 			customers.data.forEach((c) => {

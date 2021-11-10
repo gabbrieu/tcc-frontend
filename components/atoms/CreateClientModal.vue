@@ -199,7 +199,7 @@ export default Vue.extend({
 
 			try {
 				const response = await this.$axios.post(
-					`http://localhost:3002/customers`,
+					`${this.$config.baseURL}/customers`,
 					{
 						name: this.name,
 						email: this.email,
