@@ -44,15 +44,52 @@
 				>
 					<div class="pl-2 pr-2 pb-2">
 						<div class="flex justify-between">
-							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<h4
+								class="
+									pt-3
+									font-extrabold
+									text-lg
+									overflow-ellipsis overflow-hidden
+									descricao-1-line
+								"
+							>
+								{{ customer.name }}
+							</h4>
 							<img
 								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
-								@click="showEditCardModal = true"
+								v-popover.bottom="{ name: customer.id }"
 							/>
+							<Popover class="cursor-default" :name="customer.id" :width="200">
+								<div class="cursor-pointer inline-flex pt-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/pencil.svg"
+										alt="Botão para editar um cliente"
+									/>
+									<p class="font-medium">Editar um cliente</p>
+								</div>
+								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/exclude.svg"
+										alt="Botão para excluir um cliente"
+									/>
+									<p class="font-medium">Excluir um cliente</p>
+								</div>
+							</Popover>
 						</div>
-						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p
+							class="
+								text-xs text-gray
+								-mt-0.5
+								overflow-ellipsis overflow-hidden
+								descricao-1-line
+							"
+						>
+							{{ customer.city }}
+						</p>
 						<p
 							class="
 								mt-12
@@ -143,15 +180,52 @@
 				>
 					<div class="pl-2 pr-2 pb-2">
 						<div class="flex justify-between">
-							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<h4
+								class="
+									pt-3
+									font-extrabold
+									text-lg
+									overflow-ellipsis overflow-hidden
+									descricao-1-line
+								"
+							>
+								{{ customer.name }}
+							</h4>
 							<img
 								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
-								@click="showEditCardModal = true"
+								v-popover.bottom="{ name: customer.id }"
 							/>
+							<Popover class="cursor-default" :name="customer.id" :width="200">
+								<div class="cursor-pointer inline-flex pt-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/pencil.svg"
+										alt="Botão para editar um cliente"
+									/>
+									<p class="font-medium">Editar um cliente</p>
+								</div>
+								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/exclude.svg"
+										alt="Botão para excluir um cliente"
+									/>
+									<p class="font-medium">Excluir um cliente</p>
+								</div>
+							</Popover>
 						</div>
-						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p
+							class="
+								text-xs text-gray
+								-mt-0.5
+								overflow-ellipsis overflow-hidden
+								descricao-1-line
+							"
+						>
+							{{ customer.city }}
+						</p>
 						<p
 							class="
 								mt-12
@@ -242,15 +316,52 @@
 				>
 					<div class="pl-2 pr-2 pb-2">
 						<div class="flex justify-between">
-							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<h4
+								class="
+									pt-3
+									font-extrabold
+									text-lg
+									overflow-ellipsis overflow-hidden
+									descricao-1-line
+								"
+							>
+								{{ customer.name }}
+							</h4>
 							<img
 								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
-								@click="showEditCardModal = true"
+								v-popover.bottom="{ name: customer.id }"
 							/>
+							<Popover class="cursor-default" :name="customer.id" :width="200">
+								<div class="cursor-pointer inline-flex pt-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/pencil.svg"
+										alt="Botão para editar um cliente"
+									/>
+									<p class="font-medium">Editar um cliente</p>
+								</div>
+								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/exclude.svg"
+										alt="Botão para excluir um cliente"
+									/>
+									<p class="font-medium">Excluir um cliente</p>
+								</div>
+							</Popover>
 						</div>
-						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p
+							class="
+								text-xs text-gray
+								-mt-0.5
+								overflow-ellipsis overflow-hidden
+								descricao-1-line
+							"
+						>
+							{{ customer.city }}
+						</p>
 						<p
 							class="
 								mt-12
@@ -341,15 +452,52 @@
 				>
 					<div class="pl-2 pr-2 pb-2">
 						<div class="flex justify-between">
-							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<h4
+								class="
+									pt-3
+									font-extrabold
+									text-lg
+									overflow-ellipsis overflow-hidden
+									descricao-1-line
+								"
+							>
+								{{ customer.name }}
+							</h4>
 							<img
 								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
-								@click="showEditCardModal = true"
+								v-popover.bottom="{ name: customer.id }"
 							/>
+							<Popover class="cursor-default" :name="customer.id" :width="200">
+								<div class="cursor-pointer inline-flex pt-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/pencil.svg"
+										alt="Botão para editar um cliente"
+									/>
+									<p class="font-medium">Editar um cliente</p>
+								</div>
+								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/exclude.svg"
+										alt="Botão para excluir um cliente"
+									/>
+									<p class="font-medium">Excluir um cliente</p>
+								</div>
+							</Popover>
 						</div>
-						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p
+							class="
+								text-xs text-gray
+								-mt-0.5
+								overflow-ellipsis overflow-hidden
+								descricao-1-line
+							"
+						>
+							{{ customer.city }}
+						</p>
 						<p
 							class="
 								mt-12
@@ -440,15 +588,52 @@
 				>
 					<div class="pl-2 pr-2 pb-2">
 						<div class="flex justify-between">
-							<h4 class="pt-3 font-extrabold text-lg">{{ customer.name }}</h4>
+							<h4
+								class="
+									pt-3
+									font-extrabold
+									text-lg
+									overflow-ellipsis overflow-hidden
+									descricao-1-line
+								"
+							>
+								{{ customer.name }}
+							</h4>
 							<img
 								class="w-4 mr-2 cursor-pointer"
 								src="~/assets/three-dots.svg"
 								alt="Botão para opção"
-								@click="showEditCardModal = true"
+								v-popover.left="{ name: customer.id }"
 							/>
+							<Popover class="cursor-default" :name="customer.id" :width="200">
+								<div class="cursor-pointer inline-flex pt-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/pencil.svg"
+										alt="Botão para editar um cliente"
+									/>
+									<p class="font-medium">Editar um cliente</p>
+								</div>
+								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/exclude.svg"
+										alt="Botão para excluir um cliente"
+									/>
+									<p class="font-medium">Excluir um cliente</p>
+								</div>
+							</Popover>
 						</div>
-						<p class="text-xs text-gray -mt-0.5">{{ customer.city }}</p>
+						<p
+							class="
+								text-xs text-gray
+								-mt-0.5
+								overflow-ellipsis overflow-hidden
+								descricao-1-line
+							"
+						>
+							{{ customer.city }}
+						</p>
 						<p
 							class="
 								mt-12
@@ -582,6 +767,13 @@ export default Vue.extend({
 .descricao {
 	display: -webkit-box;
 	-webkit-line-clamp: 2; /* number of lines to show */
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.descricao-1-line {
+	display: -webkit-box;
+	-webkit-line-clamp: 1; /* number of lines to show */
 	line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
