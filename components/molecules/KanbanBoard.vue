@@ -68,7 +68,26 @@
 										src="~/assets/pencil.svg"
 										alt="Botão para editar um cliente"
 									/>
-									<p class="font-medium">Editar um cliente</p>
+									<p class="font-medium" @click="showEditCardModal = true">
+										Editar um cliente
+									</p>
+									<UpdateClientModal
+										:birthDate="customer.birthDate"
+										:cellphone="customer.cellPhone"
+										:city="customer.city"
+										:column="customer.column"
+										:description="customer.description"
+										:district="customer.district"
+										:document="customer.document"
+										:email="customer.email"
+										:gender="customer.gender"
+										:houseNumber="customer.houseNumber"
+										:name="customer.name"
+										:priority="customer.priority"
+										:street="customer.street"
+										v-show="showEditCardModal"
+										@close-edit-modal="showEditCardModal = false"
+									/>
 								</div>
 								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
 									<img
@@ -686,6 +705,7 @@
 import Vue from 'vue';
 import draggable from 'vuedraggable';
 import { ICustomer } from '../../utils/types';
+import UpdateClientModal from '../atoms/UpdateClientModal.vue';
 
 export default Vue.extend({
 	data() {
@@ -701,6 +721,7 @@ export default Vue.extend({
 
 	components: {
 		draggable,
+		UpdateClientModal,
 	},
 
 	props: {
