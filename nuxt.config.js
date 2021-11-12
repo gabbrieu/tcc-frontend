@@ -26,7 +26,10 @@ export default {
 	css: ['@/assets/css/global.css'],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: ['@/plugins/axios-accessor.ts'],
+	plugins: [
+		'@/plugins/axios-accessor.ts',
+		{ src: '@/plugins/vue-popover.ts', mode: 'client' },
+	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: [

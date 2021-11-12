@@ -9,7 +9,7 @@ module.exports = {
 			title: '#2e384d',
 			red: '#e83f5b',
 			'red-dark': '#d13952',
-			green: '#4cd62b',
+			green: '#77c277',
 			'green-dark': '#43c026',
 			blue: '#3F53FD',
 			'blue-dark': '#4953b8',
