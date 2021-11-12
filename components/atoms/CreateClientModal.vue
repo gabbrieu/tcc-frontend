@@ -4,12 +4,7 @@
 			<header class="flex justify-between border-b border-light-gray mb-4">
 				<h2 class="font-bold pl-3 text-lg">Cadastro de cliente</h2>
 				<div class="cursor-pointer mr-3" @click="$emit('close-modal')">
-					<img
-						class="w-3 mt-2"
-						src="~/assets/close-icon.svg"
-						alt=""
-						@click="showCreateClientModal = false"
-					/>
+					<img class="w-3 mt-2" src="~/assets/close-icon.svg" alt="" />
 				</div>
 			</header>
 			<form v-on:submit.prevent="sendClient" class="flex flex-row">
@@ -157,6 +152,7 @@
 							font-bold
 							w-4/12
 							ml-auto
+							hover:bg-blue hover:text-white
 						"
 					>
 						Enviar
@@ -195,7 +191,7 @@ export default Vue.extend({
 	methods: {
 		async sendClient() {
 			const documentWithoutPunctuation = this.document.replace(/[^0-9]/g, '');
-			const cellPhoneWithoutPunctuation = this.cellphone.replace(/[^0-9]/g, '');
+			const cellphoneWithoutPunctuation = this.cellphone.replace(/[^0-9]/g, '');
 
 			try {
 				const response = await this.$axios.post(
@@ -211,7 +207,7 @@ export default Vue.extend({
 						status: true,
 						street: this.street,
 						birthDate: this.birthDate,
-						cellphone: cellPhoneWithoutPunctuation,
+						cellphone: cellphoneWithoutPunctuation,
 						city: this.city,
 						column: this.column,
 						priority: this.priority,

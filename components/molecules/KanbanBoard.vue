@@ -19,12 +19,14 @@
 					firstColumnNew.length
 				}}</span>
 			</div>
-			<draggable
+			<Draggable
 				class="kanban-column"
 				:list="firstColumnNew"
 				group="tasks"
 				animation="250"
 				@end="update"
+				filter=".not-drag"
+				:preventOnFilter="false"
 			>
 				<div
 					class="
@@ -61,19 +63,34 @@
 								alt="Botão para opção"
 								v-popover.bottom="{ name: customer.id }"
 							/>
-							<Popover class="cursor-default" :name="customer.id" :width="200">
-								<div class="cursor-pointer inline-flex pt-2 pl-2">
+							<Popover
+								class="cursor-default not-drag"
+								:name="customer.id"
+								:width="160"
+							>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										pt-2
+										pl-2
+										pb-2
+										pr-4
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/pencil.svg"
 										alt="Botão para editar um cliente"
 									/>
 									<p class="font-medium" @click="showEditCardModal = true">
-										Editar um cliente
+										Editar cliente
 									</p>
 									<UpdateClientModal
+										class="not-drag"
 										:birthDate="customer.birthDate"
-										:cellphone="customer.cellPhone"
+										:cellphone="customer.cellphone"
 										:city="customer.city"
 										:column="customer.column"
 										:description="customer.description"
@@ -85,17 +102,37 @@
 										:name="customer.name"
 										:priority="customer.priority"
 										:street="customer.street"
+										:customerId="customer.id"
 										v-show="showEditCardModal"
-										@close-edit-modal="showEditCardModal = false"
+										@close-edit-modal="updateCustomerInfos"
 									/>
 								</div>
-								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/exclude.svg"
 										alt="Botão para excluir um cliente"
 									/>
-									<p class="font-medium">Excluir um cliente</p>
+									<p class="font-medium" @click="showExcludeCardModal = true">
+										Excluir cliente
+									</p>
+									<ExcludeClientModal
+										:customerId="customer.id"
+										v-show="showExcludeCardModal"
+										@close-exclude-modal="showExcludeCardModal = false"
+										v-on="$listeners"
+									/>
 								</div>
 							</Popover>
 						</div>
@@ -152,7 +189,7 @@
 						></div>
 					</div>
 				</div>
-			</draggable>
+			</Draggable>
 		</div>
 
 		<!-- SECOND COLUMN -->
@@ -174,12 +211,14 @@
 					secondColumnNew.length
 				}}</span>
 			</div>
-			<draggable
+			<Draggable
 				class="kanban-column"
 				:list="secondColumnNew"
 				group="tasks"
 				animation="250"
 				@end="update"
+				filter=".not-drag"
+				:preventOnFilter="false"
 			>
 				<div
 					class="
@@ -216,22 +255,76 @@
 								alt="Botão para opção"
 								v-popover.bottom="{ name: customer.id }"
 							/>
-							<Popover class="cursor-default" :name="customer.id" :width="200">
-								<div class="cursor-pointer inline-flex pt-2 pl-2">
+							<Popover
+								class="cursor-default not-drag"
+								:name="customer.id"
+								:width="160"
+							>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										pt-2
+										pl-2
+										pb-2
+										pr-4
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/pencil.svg"
 										alt="Botão para editar um cliente"
 									/>
-									<p class="font-medium">Editar um cliente</p>
+									<p class="font-medium" @click="showEditCardModal = true">
+										Editar cliente
+									</p>
+									<UpdateClientModal
+										class="not-drag"
+										:birthDate="customer.birthDate"
+										:cellphone="customer.cellphone"
+										:city="customer.city"
+										:column="customer.column"
+										:description="customer.description"
+										:district="customer.district"
+										:document="customer.document"
+										:email="customer.email"
+										:gender="customer.gender"
+										:houseNumber="customer.houseNumber"
+										:name="customer.name"
+										:priority="customer.priority"
+										:street="customer.street"
+										:customerId="customer.id"
+										v-show="showEditCardModal"
+										@close-edit-modal="updateCustomerInfos"
+									/>
 								</div>
-								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/exclude.svg"
 										alt="Botão para excluir um cliente"
 									/>
-									<p class="font-medium">Excluir um cliente</p>
+									<p class="font-medium" @click="showExcludeCardModal = true">
+										Excluir cliente
+									</p>
+									<ExcludeClientModal
+										:customerId="customer.id"
+										v-show="showExcludeCardModal"
+										@close-exclude-modal="showExcludeCardModal = false"
+										v-on="$listeners"
+									/>
 								</div>
 							</Popover>
 						</div>
@@ -288,7 +381,7 @@
 						></div>
 					</div>
 				</div>
-			</draggable>
+			</Draggable>
 		</div>
 
 		<!-- THIRD COLUMN -->
@@ -310,12 +403,14 @@
 					thirdColumnNew.length
 				}}</span>
 			</div>
-			<draggable
+			<Draggable
 				class="kanban-column"
 				:list="thirdColumnNew"
 				group="tasks"
 				animation="250"
 				@end="update"
+				filter=".not-drag"
+				:preventOnFilter="false"
 			>
 				<div
 					class="
@@ -352,22 +447,76 @@
 								alt="Botão para opção"
 								v-popover.bottom="{ name: customer.id }"
 							/>
-							<Popover class="cursor-default" :name="customer.id" :width="200">
-								<div class="cursor-pointer inline-flex pt-2 pl-2">
+							<Popover
+								class="cursor-default not-drag"
+								:name="customer.id"
+								:width="160"
+							>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										pt-2
+										pl-2
+										pb-2
+										pr-4
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/pencil.svg"
 										alt="Botão para editar um cliente"
 									/>
-									<p class="font-medium">Editar um cliente</p>
+									<p class="font-medium" @click="showEditCardModal = true">
+										Editar cliente
+									</p>
+									<UpdateClientModal
+										class="not-drag"
+										:birthDate="customer.birthDate"
+										:cellphone="customer.cellphone"
+										:city="customer.city"
+										:column="customer.column"
+										:description="customer.description"
+										:district="customer.district"
+										:document="customer.document"
+										:email="customer.email"
+										:gender="customer.gender"
+										:houseNumber="customer.houseNumber"
+										:name="customer.name"
+										:priority="customer.priority"
+										:street="customer.street"
+										:customerId="customer.id"
+										v-show="showEditCardModal"
+										@close-edit-modal="updateCustomerInfos"
+									/>
 								</div>
-								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/exclude.svg"
 										alt="Botão para excluir um cliente"
 									/>
-									<p class="font-medium">Excluir um cliente</p>
+									<p class="font-medium" @click="showExcludeCardModal = true">
+										Excluir cliente
+									</p>
+									<ExcludeClientModal
+										:customerId="customer.id"
+										v-show="showExcludeCardModal"
+										@close-exclude-modal="showExcludeCardModal = false"
+										v-on="$listeners"
+									/>
 								</div>
 							</Popover>
 						</div>
@@ -424,7 +573,7 @@
 						></div>
 					</div>
 				</div>
-			</draggable>
+			</Draggable>
 		</div>
 
 		<!-- FOURTH COLUMN -->
@@ -446,12 +595,14 @@
 					fourthColumnNew.length
 				}}</span>
 			</div>
-			<draggable
+			<Draggable
 				class="kanban-column"
 				:list="fourthColumnNew"
 				group="tasks"
 				animation="250"
 				@end="update"
+				filter=".not-drag"
+				:preventOnFilter="false"
 			>
 				<div
 					class="
@@ -488,22 +639,76 @@
 								alt="Botão para opção"
 								v-popover.bottom="{ name: customer.id }"
 							/>
-							<Popover class="cursor-default" :name="customer.id" :width="200">
-								<div class="cursor-pointer inline-flex pt-2 pl-2">
+							<Popover
+								class="cursor-default not-drag"
+								:name="customer.id"
+								:width="160"
+							>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										pt-2
+										pl-2
+										pb-2
+										pr-4
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/pencil.svg"
 										alt="Botão para editar um cliente"
 									/>
-									<p class="font-medium">Editar um cliente</p>
+									<p class="font-medium" @click="showEditCardModal = true">
+										Editar cliente
+									</p>
+									<UpdateClientModal
+										class="not-drag"
+										:birthDate="customer.birthDate"
+										:cellphone="customer.cellphone"
+										:city="customer.city"
+										:column="customer.column"
+										:description="customer.description"
+										:district="customer.district"
+										:document="customer.document"
+										:email="customer.email"
+										:gender="customer.gender"
+										:houseNumber="customer.houseNumber"
+										:name="customer.name"
+										:priority="customer.priority"
+										:street="customer.street"
+										:customerId="customer.id"
+										v-show="showEditCardModal"
+										@close-edit-modal="updateCustomerInfos"
+									/>
 								</div>
-								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/exclude.svg"
 										alt="Botão para excluir um cliente"
 									/>
-									<p class="font-medium">Excluir um cliente</p>
+									<p class="font-medium" @click="showExcludeCardModal = true">
+										Excluir cliente
+									</p>
+									<ExcludeClientModal
+										:customerId="customer.id"
+										v-show="showExcludeCardModal"
+										@close-exclude-modal="showExcludeCardModal = false"
+										v-on="$listeners"
+									/>
 								</div>
 							</Popover>
 						</div>
@@ -560,7 +765,7 @@
 						></div>
 					</div>
 				</div>
-			</draggable>
+			</Draggable>
 		</div>
 
 		<!-- FIFTH COLUMN -->
@@ -582,12 +787,14 @@
 					fifthColumnNew.length
 				}}</span>
 			</div>
-			<draggable
+			<Draggable
 				class="kanban-column"
 				:list="fifthColumnNew"
 				group="tasks"
 				animation="250"
 				@end="update"
+				filter=".not-drag"
+				:preventOnFilter="false"
 			>
 				<div
 					class="
@@ -624,22 +831,76 @@
 								alt="Botão para opção"
 								v-popover.left="{ name: customer.id }"
 							/>
-							<Popover class="cursor-default" :name="customer.id" :width="200">
-								<div class="cursor-pointer inline-flex pt-2 pl-2">
+							<Popover
+								class="cursor-default not-drag"
+								:name="customer.id"
+								:width="160"
+							>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										pt-2
+										pl-2
+										pb-2
+										pr-4
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/pencil.svg"
 										alt="Botão para editar um cliente"
 									/>
-									<p class="font-medium">Editar um cliente</p>
+									<p class="font-medium" @click="showEditCardModal = true">
+										Editar cliente
+									</p>
+									<UpdateClientModal
+										class="not-drag"
+										:birthDate="customer.birthDate"
+										:cellphone="customer.cellphone"
+										:city="customer.city"
+										:column="customer.column"
+										:description="customer.description"
+										:district="customer.district"
+										:document="customer.document"
+										:email="customer.email"
+										:gender="customer.gender"
+										:houseNumber="customer.houseNumber"
+										:name="customer.name"
+										:priority="customer.priority"
+										:street="customer.street"
+										:customerId="customer.id"
+										v-show="showEditCardModal"
+										@close-edit-modal="updateCustomerInfos"
+									/>
 								</div>
-								<div class="cursor-pointer inline-flex mt-3 pb-2 pl-2">
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+								>
 									<img
 										class="w-5 h-5 mr-2"
 										src="~/assets/exclude.svg"
 										alt="Botão para excluir um cliente"
 									/>
-									<p class="font-medium">Excluir um cliente</p>
+									<p class="font-medium" @click="showExcludeCardModal = true">
+										Excluir cliente
+									</p>
+									<ExcludeClientModal
+										:customerId="customer.id"
+										v-show="showExcludeCardModal"
+										@close-exclude-modal="showExcludeCardModal = false"
+										v-on="$listeners"
+									/>
 								</div>
 							</Popover>
 						</div>
@@ -696,15 +957,16 @@
 						></div>
 					</div>
 				</div>
-			</draggable>
+			</Draggable>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import draggable from 'vuedraggable';
+import Draggable from 'vuedraggable';
 import { ICustomer } from '../../utils/types';
+import ExcludeClientModal from '../atoms/ExcludeClientModal.vue';
 import UpdateClientModal from '../atoms/UpdateClientModal.vue';
 
 export default Vue.extend({
@@ -716,12 +978,14 @@ export default Vue.extend({
 			fourthColumnNew: this.fourthColumn as ICustomer[],
 			fifthColumnNew: this.fifthColumn as ICustomer[],
 			showEditCardModal: false,
+			showExcludeCardModal: false,
 		};
 	},
 
 	components: {
-		draggable,
+		Draggable,
 		UpdateClientModal,
+		ExcludeClientModal,
 	},
 
 	props: {
@@ -766,6 +1030,52 @@ export default Vue.extend({
 				});
 			} catch (error) {
 				console.log(error);
+			}
+		},
+
+		updateCustomerInfos(customerUpdated: ICustomer | undefined) {
+			this.showEditCardModal = false;
+			if (customerUpdated) {
+				switch (customerUpdated.column) {
+					case 1:
+						const index = this.firstColumnNew.findIndex(
+							(c) => c.id === customerUpdated.id
+						);
+						this.firstColumnNew[index] = customerUpdated;
+						break;
+
+					case 2:
+						const index2 = this.secondColumnNew.findIndex(
+							(c) => c.id === customerUpdated.id
+						);
+						this.secondColumnNew[index2] = customerUpdated;
+						break;
+
+					case 3:
+						const index3 = this.thirdColumnNew.findIndex(
+							(c) => c.id === customerUpdated.id
+						);
+						this.thirdColumnNew[index3] = customerUpdated;
+						break;
+
+					case 4:
+						const index4 = this.fourthColumnNew.findIndex(
+							(c) => c.id === customerUpdated.id
+						);
+						this.fourthColumnNew[index4] = customerUpdated;
+						break;
+
+					case 5:
+						const index5 = this.fifthColumnNew.findIndex(
+							(c) => c.id === customerUpdated.id
+						);
+						this.fifthColumnNew[index5] = customerUpdated;
+						break;
+
+					default:
+						console.log(`Coluna ${customerUpdated.column} não existe`);
+						break;
+				}
 			}
 		},
 	},

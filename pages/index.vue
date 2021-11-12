@@ -15,6 +15,7 @@
 					font-semibold
 					pr-4
 					pl-4
+					hover:bg-blue hover:text-white
 				"
 				@click="showCreateClientModal = true"
 			>
@@ -33,6 +34,7 @@
 					:third-column="thirdColumn"
 					:fourth-column="fourthColumn"
 					:fifth-column="fifthColumn"
+					@close-exclude-modal="getCustomersInDatabase"
 				/>
 			</div>
 		</main>

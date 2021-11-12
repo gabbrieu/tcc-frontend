@@ -1,29 +1,25 @@
 <template>
-	<div class="modal-overlay" @click="$emit('close-edit-modal')">
+	<div class="modal-overlay cursor-auto" @click="$emit('close-edit-modal')">
 		<div class="modal" @click.stop>
 			<header class="flex justify-between border-b border-light-gray mb-4">
 				<h2 class="font-bold pl-3 text-lg">Edição de dados de um cliente</h2>
 				<div class="cursor-pointer mr-3" @click="$emit('close-edit-modal')">
-					<img
-						class="w-3 mt-2"
-						src="~/assets/close-icon.svg"
-						alt=""
-						@click="showEditCardModal = false"
-					/>
+					<img class="w-3 mt-2" src="~/assets/close-icon.svg" alt="" />
 				</div>
 			</header>
-			<form v-on:submit.prevent="sendClient" class="flex flex-row">
+			<form v-on:submit.prevent="updateClient" class="flex flex-row">
 				<div class="flex flex-col flex-1 ml-3 mr-3">
-					<label for="nameNew">Nome Completo</label>
+					<label for="nameNew">Nome Completo*</label>
 					<input
 						type="text"
 						name="nameNew"
 						id="nameNew"
 						v-model.trim="nameNew"
 						placeholder="Digite o nome completo do cliente"
+						required
 					/>
 
-					<label for="cellphoneNew">Celular</label>
+					<label for="cellphoneNew">Celular*</label>
 					<input
 						type="text"
 						name="cellphoneNew"
@@ -31,6 +27,7 @@
 						v-model.trim="cellphoneNew"
 						placeholder="Digite o celular do cliente"
 						v-mask="'(##) #####-####'"
+						required
 					/>
 
 					<label for="emailNew">Email</label>
@@ -64,7 +61,7 @@
 						disabled
 					/>
 
-					<p>Gênero</p>
+					<p>Gênero*</p>
 					<select class="cursor-pointer" name="genderNew" v-model="genderNew">
 						<option disabled value="">Escolha um item</option>
 						<option value="MASCULINO">Masculino</option>
@@ -72,7 +69,7 @@
 						<option value="NÃO INFORMADO">Não informado</option>
 					</select>
 
-					<p>Etapa da Jornada</p>
+					<p>Etapa da Jornada*</p>
 					<select class="cursor-pointer" name="columnNew" v-model="columnNew">
 						<option disabled value="">Escolha um item</option>
 						<option :value="1">Cliente em potencial</option>
@@ -82,7 +79,7 @@
 						<option :value="5">Finalizados</option>
 					</select>
 
-					<label for="descriptionNew">Descrição</label>
+					<label for="descriptionNew">Descrição*</label>
 					<textarea
 						class="resize-none"
 						type="text"
@@ -90,47 +87,52 @@
 						id="descriptionNew"
 						v-model.trim="descriptionNew"
 						placeholder="Informações a mais sobre o cliente"
+						required
 					/>
 				</div>
 
 				<div class="flex flex-col flex-1 pl-3 pr-3 border-l border-light-gray">
-					<label for="cityNew">Cidade</label>
+					<label for="cityNew">Cidade*</label>
 					<input
 						type="text"
 						name="cityNew"
 						id="cityNew"
 						v-model.trim="cityNew"
 						placeholder="Digite a cidade do cliente"
+						required
 					/>
 
-					<label for="streetNew">Rua</label>
+					<label for="streetNew">Rua*</label>
 					<input
 						type="text"
 						name="streetNew"
 						id="streetNew"
 						v-model.trim="streetNew"
 						placeholder="Digite a rua do cliente"
+						required
 					/>
 
-					<label for="districtNew">Bairro</label>
+					<label for="districtNew">Bairro*</label>
 					<input
 						type="text"
 						name="districtNew"
 						id="districtNew"
 						v-model.trim="districtNew"
 						placeholder="Digite o bairro do cliente"
+						required
 					/>
 
-					<label for="houseNumberNew">Número</label>
+					<label for="houseNumberNew">Número*</label>
 					<input
 						type="text"
 						name="houseNumberNew"
 						id="houseNumberNew"
 						v-model.trim="houseNumberNew"
 						placeholder="Digite o número da casa do cliente"
+						required
 					/>
 
-					<p>Prioridade</p>
+					<p>Prioridade*</p>
 					<select
 						class="cursor-pointer"
 						name="priorityNew"
@@ -155,6 +157,7 @@
 							font-bold
 							w-4/12
 							ml-auto
+							hover:bg-blue hover:text-white
 						"
 					>
 						Enviar
@@ -167,7 +170,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import { GenderEnum, PriorityEnum } from '../../utils/types';
+import { GenderEnum, ICustomer, PriorityEnum } from '../../utils/types';
 import VueMask from 'v-mask';
 Vue.use(VueMask);
 
@@ -208,55 +211,52 @@ export default Vue.extend({
 		priority: {
 			type: String as PropType<PriorityEnum>,
 		},
+		customerId: String,
 	},
 
-	// methods: {
-	// 	async sendClient() {
-	// 		const documentWithoutPunctuation = this.document.replace(/[^0-9]/g, '');
-	// 		const cellPhoneWithoutPunctuation = this.cellphone.replace(/[^0-9]/g, '');
+	methods: {
+		async updateClient() {
+			const documentWithoutPunctuation = this.documentNew.replace(
+				/[^0-9]/g,
+				''
+			);
 
-	// 		try {
-	// 			const response = await this.$axios.post(
-	// 				`${this.$config.baseURL}/customers`,
-	// 				{
-	// 					name: this.name,
-	// 					email: this.email,
-	// 					document: documentWithoutPunctuation,
-	// 					district: this.district,
-	// 					description: this.description,
-	// 					gender: this.gender,
-	// 					houseNumber: this.houseNumber,
-	// 					status: true,
-	// 					street: this.street,
-	// 					birthDate: this.birthDate,
-	// 					cellphone: cellPhoneWithoutPunctuation,
-	// 					city: this.city,
-	// 					column: this.column,
-	// 					priority: this.priority,
-	// 				}
-	// 			);
+			// Criando uma cópia da variável para não alterar ela diretamente
+			const cellphoneWithoutPunctuation: string = JSON.parse(
+				JSON.stringify(this.cellphoneNew)
+			);
 
-	// 			if (response.status === 201) {
-	// 				this.name = '';
-	// 				this.cellphone = '';
-	// 				this.email = '';
-	// 				this.document = '';
-	// 				this.birthDate = '';
-	// 				this.gender = GenderEnum.NÃO_INFORMADO;
-	// 				this.column = 1;
-	// 				this.city = '';
-	// 				this.street = '';
-	// 				this.district = '';
-	// 				this.houseNumber = '';
-	// 				this.description = '';
-	// 				this.priority = PriorityEnum.MEDIUM;
-	// 				this.$emit('close-edit-modal');
-	// 			}
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	},
-	// },
+			cellphoneWithoutPunctuation.replace(/[^0-9]/g, '');
+
+			try {
+				const response = await this.$axios.patch<ICustomer>(
+					`${this.$config.baseURL}/customers/${this.customerId}`,
+					{
+						name: this.nameNew,
+						email: this.emailNew,
+						document: documentWithoutPunctuation,
+						district: this.districtNew,
+						description: this.descriptionNew,
+						gender: this.genderNew,
+						houseNumber: this.houseNumberNew,
+						status: true,
+						street: this.streetNew,
+						birthDate: this.birthDateNew,
+						cellphone: cellphoneWithoutPunctuation,
+						city: this.cityNew,
+						column: this.columnNew,
+						priority: this.priorityNew,
+					}
+				);
+
+				if (response.status === 200) {
+					this.$emit('close-edit-modal', response.data);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		},
+	},
 });
 </script>
 
