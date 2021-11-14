@@ -66,7 +66,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -75,7 +75,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -115,7 +115,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -134,6 +134,27 @@
 										v-on="$listeners"
 									/>
 								</div>
+								<NuxtLink :to="`/clientes/${customer.id}`">
+									<div
+										class="
+											cursor-pointer
+											inline-flex
+											mt-1
+											pt-2
+											pb-2
+											pl-2
+											pr-2.5
+											hover:bg-background
+										"
+									>
+										<img
+											class="w-5 h-5 mr-2"
+											src="~/assets/eye.svg"
+											alt="Ícone para visualizar um cliente"
+										/>
+										<p class="font-medium">Visualizar cliente</p>
+									</div>
+								</NuxtLink>
 							</Popover>
 						</div>
 						<p
@@ -258,7 +279,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -267,7 +288,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -307,7 +328,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -326,6 +347,27 @@
 										v-on="$listeners"
 									/>
 								</div>
+								<NuxtLink :to="`/clientes/${customer.id}`">
+									<div
+										class="
+											cursor-pointer
+											inline-flex
+											mt-1
+											pt-2
+											pb-2
+											pl-2
+											pr-2.5
+											hover:bg-background
+										"
+									>
+										<img
+											class="w-5 h-5 mr-2"
+											src="~/assets/eye.svg"
+											alt="Ícone para visualizar um cliente"
+										/>
+										<p class="font-medium">Visualizar cliente</p>
+									</div>
+								</NuxtLink>
 							</Popover>
 						</div>
 						<p
@@ -450,7 +492,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -459,7 +501,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -499,7 +541,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -518,6 +560,27 @@
 										v-on="$listeners"
 									/>
 								</div>
+								<NuxtLink :to="`/clientes/${customer.id}`">
+									<div
+										class="
+											cursor-pointer
+											inline-flex
+											mt-1
+											pt-2
+											pb-2
+											pl-2
+											pr-2.5
+											hover:bg-background
+										"
+									>
+										<img
+											class="w-5 h-5 mr-2"
+											src="~/assets/eye.svg"
+											alt="Ícone para visualizar um cliente"
+										/>
+										<p class="font-medium">Visualizar cliente</p>
+									</div>
+								</NuxtLink>
 							</Popover>
 						</div>
 						<p
@@ -642,7 +705,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -651,7 +714,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -691,7 +754,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -710,6 +773,27 @@
 										v-on="$listeners"
 									/>
 								</div>
+								<NuxtLink :to="`/clientes/${customer.id}`">
+									<div
+										class="
+											cursor-pointer
+											inline-flex
+											mt-1
+											pt-2
+											pb-2
+											pl-2
+											pr-2.5
+											hover:bg-background
+										"
+									>
+										<img
+											class="w-5 h-5 mr-2"
+											src="~/assets/eye.svg"
+											alt="Ícone para visualizar um cliente"
+										/>
+										<p class="font-medium">Visualizar cliente</p>
+									</div>
+								</NuxtLink>
 							</Popover>
 						</div>
 						<p
@@ -834,7 +918,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -843,7 +927,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -883,7 +967,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -902,6 +986,27 @@
 										v-on="$listeners"
 									/>
 								</div>
+								<NuxtLink :to="`/clientes/${customer.id}`">
+									<div
+										class="
+											cursor-pointer
+											inline-flex
+											mt-1
+											pt-2
+											pb-2
+											pl-2
+											pr-2.5
+											hover:bg-background
+										"
+									>
+										<img
+											class="w-5 h-5 mr-2"
+											src="~/assets/eye.svg"
+											alt="Ícone para visualizar um cliente"
+										/>
+										<p class="font-medium">Visualizar cliente</p>
+									</div>
+								</NuxtLink>
 							</Popover>
 						</div>
 						<p

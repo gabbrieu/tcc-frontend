@@ -24,6 +24,11 @@ module.exports = {
 			'priority-high': '#ffa500',
 			'priority-urgent': '#FA0000',
 		},
+		extend: {
+			spacing: {
+				9.5: '2.375rem',
+			},
+		},
 	},
 	variants: {},
 	plugins: [],
