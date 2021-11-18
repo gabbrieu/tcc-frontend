@@ -12,6 +12,13 @@ export enum PriorityEnum {
 	URGENT = 'URGENT',
 }
 
+export interface IComments {
+	id: string;
+	comment: string;
+	createdAt: string;
+	updatedAt: string;
+}
+
 export interface ICustomer {
 	id: string;
 	name: string;
@@ -31,6 +38,7 @@ export interface ICustomer {
 	order: number;
 	createdAt: string;
 	updatedAt: string;
+	comments: IComments[];
 }
 
 export interface IGetAllCustomersResponse {
