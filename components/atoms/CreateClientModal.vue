@@ -249,7 +249,6 @@ export default Vue.extend({
 	justify-content: center;
 	background-color: #000000da;
 	align-items: center;
-	font-family: 'Roboto', sans-serif;
 }
 
 .modal {
