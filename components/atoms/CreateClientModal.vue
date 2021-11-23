@@ -38,15 +38,95 @@
 						v-model.trim="email"
 						placeholder="Digite o email do cliente"
 					/>
-
-					<label for="document">CPF*</label>
+					<ul
+						class="
+							filter-switch
+							inline-flex
+							items-center
+							relative
+							h-10
+							py-1
+							pr-1
+							space-x-1
+							rounded-md
+							font-semibold
+							text-blue-600
+							mt-1
+							mb-0.5
+						"
+					>
+						<li class="filter-switch-item flex relative h-8">
+							<input
+								type="radio"
+								id="CPF"
+								value="CPF"
+								v-model="typeDocument"
+								class="sr-only"
+								checked
+							/>
+							<label
+								for="CPF"
+								class="
+									h-8
+									py-1
+									px-2
+									text-sm
+									leading-6
+									text-gray-600
+									hover:text-gray-800
+									bg-white
+									rounded
+									shadow
+								"
+								>CPF</label
+							>
+							<div aria-hidden="true" class="filter-active"></div>
+						</li>
+						<li class="filter-switch-item flex relative h-8">
+							<input
+								type="radio"
+								id="CNPJ"
+								value="CNPJ"
+								v-model="typeDocument"
+								class="sr-only"
+							/>
+							<label
+								for="CNPJ"
+								class="
+									h-8
+									py-1
+									px-2
+									text-sm
+									leading-6
+									text-gray-600
+									hover:text-gray-800
+									bg-white
+									rounded
+									shadow
+								"
+								>CNPJ</label
+							>
+						</li>
+					</ul>
 					<input
+						v-if="typeDocument === 'CPF'"
 						type="text"
 						name="document"
-						id="document"
+						id="document1"
 						v-model.trim="document"
 						v-mask="'###.###.###-##'"
 						placeholder="Digite o CPF do cliente"
+						required
+					/>
+
+					<input
+						v-else
+						type="text"
+						name="document"
+						id="document2"
+						v-model.trim="document"
+						v-mask="'##.###.###/####-##'"
+						placeholder="Digite o CNPJ do cliente"
 						required
 					/>
 
@@ -185,6 +265,7 @@ export default Vue.extend({
 			houseNumber: '',
 			description: '',
 			priority: PriorityEnum.MEDIUM,
+			typeDocument: 'CPF',
 		};
 	},
 
@@ -239,6 +320,19 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.filter-switch label {
+	cursor: pointer;
+}
+
+.filter-switch-item input:checked + label {
+	color: inherit;
+}
+
+.filter-switch-item input:not(:checked) + label {
+	--bg-opacity: 0;
+	box-shadow: none;
+}
+
 .modal-overlay {
 	position: fixed;
 	top: 0;

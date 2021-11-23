@@ -39,8 +39,9 @@
 						placeholder="Digite o email do cliente"
 					/>
 
-					<label for="documentNew">CPF</label>
+					<label for="documentNew" v-if="document.length === 11">CPF</label>
 					<input
+						v-if="document.length === 11"
 						class="cursor-not-allowed bg-priority-very-low"
 						type="text"
 						name="documentNew"
@@ -48,6 +49,21 @@
 						v-model.trim="documentNew"
 						v-mask="'###.###.###-##'"
 						placeholder="Digite o CPF do cliente"
+						disabled
+					/>
+
+					<label for="documentNew" v-else-if="document.length === 14"
+						>CNPJ</label
+					>
+					<input
+						v-if="document.length === 14"
+						class="cursor-not-allowed bg-priority-very-low"
+						type="text"
+						name="documentNew"
+						id="documentNew"
+						v-model.trim="documentNew"
+						v-mask="'##.###.###/####-##'"
+						placeholder="Digite o CPNJ do cliente"
 						disabled
 					/>
 

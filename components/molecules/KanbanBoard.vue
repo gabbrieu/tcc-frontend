@@ -154,11 +154,13 @@
 									/>
 									<p class="font-medium">Visualizar cliente</p>
 								</div>
-								<VisualizeCustomerInfosModal
-									v-show="showCustomerInfoModal"
-									:customerId="customer.id"
-									@close-customer-info-modal="showCustomerInfoModal = false"
-								/>
+								<div :key="index">
+									<VisualizeCustomerInfosModal
+										v-show="showCustomerInfoModal"
+										:customerId="customer.id"
+										@close-customer-info-modal="showCustomerInfoModal = false"
+									/>
+								</div>
 							</Popover>
 						</div>
 						<p
@@ -1089,6 +1091,7 @@ export default Vue.extend({
 			showEditCardModal: false,
 			showExcludeCardModal: false,
 			showCustomerInfoModal: false,
+			index: 0,
 		};
 	},
 
@@ -1144,6 +1147,7 @@ export default Vue.extend({
 		},
 
 		updateCustomerInfos(customerUpdated: ICustomer | undefined) {
+			this.index += 1;
 			this.showEditCardModal = false;
 			if (customerUpdated) {
 				switch (customerUpdated.column) {

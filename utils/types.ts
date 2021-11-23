@@ -45,3 +45,25 @@ export interface IGetAllCustomersResponse {
 	data: ICustomer[];
 	count: number;
 }
+
+export interface IComments {
+	id: string;
+	comment: string;
+	customer: ICustomer;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface ICommentsGetAll {
+	id: string;
+	comment: string;
+	customerId: string;
+	customerName: string;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface ICommentsGetAllResponse {
+	data: ICommentsGetAll[];
+	count: number;
+}
