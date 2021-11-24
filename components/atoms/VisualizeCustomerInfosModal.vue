@@ -29,36 +29,30 @@
 				<input
 					type="button"
 					value="Comentários"
-					class="
-						cursor-pointer
-						bg-gray-dark
-						p-1.5
-						rounded-sm
-						font-semibold
-						text-white
-					"
+					class="cursor-pointer p-1.5 rounded-sm font-semibold"
 					@click="window = 'COMMENTS'"
+					:style="window === 'COMMENTS' ? focusWindow : notFocusWindow"
 				/>
 				<input
 					type="button"
 					value="Informações"
-					class="
-						cursor-pointer
-						bg-border-color
-						p-1.5
-						rounded-sm
-						font-semibold
-						text-kanban-column-title
-						ml-3
-					"
+					class="cursor-pointer p-1.5 rounded-sm font-semibold ml-3"
 					@click="window = 'INFOS'"
+					:style="window === 'INFOS' ? focusWindow : notFocusWindow"
 				/>
 			</div>
 
 			<div class="flex flex-col mt-3" v-if="window === 'COMMENTS'">
 				<form v-on:submit.prevent="sendComment">
 					<textarea
-						class="resize-none border border-border-color pt-1.5 pl-1.5 w-full"
+						class="
+							resize-none
+							border border-border-color
+							pt-1.5
+							pl-1.5
+							w-full
+							h-28
+						"
 						type="text"
 						name="comments"
 						id="comments"
@@ -84,26 +78,96 @@
 				</form>
 				<br />
 
-				<div
-					v-for="(comment, index) in commentsResponse"
-					:key="comment.id"
-					class="father"
-				>
+				<div v-for="(comment, index) in commentsResponse" :key="comment.id">
 					<div class="inline-flex">
 						<span class="text-kanban-column-title font-bold">Erlaine</span>
-						<span class="text-kanban-column-title ml-2">
+						<span class="text-kanban-column-title ml-2 text-sm">
 							{{ moment(comment.updatedAt).format('LLL') }}
-							<span v-if="comment.updatedAt !== comment.createdAt"
+							<span
+								v-if="comment.updatedAt !== comment.createdAt"
+								class="text-sm"
 								>(Editado)</span
 							>
 						</span>
 					</div>
-					<p v-if="index === commentsResponse.length - 1" class="py-1">
+
+					<textarea
+						v-if="showEditTextArea && showEditIndex.includes(index)"
+						class="
+							resize-none
+							border border-border-color
+							pt-1.5
+							pl-1.5
+							w-full
+							h-28
+						"
+						type="text"
+						name="editComments"
+						v-model.trim="cloneComments[index].comment"
+					/>
+
+					<p v-else class="py-1 text-sm">
 						{{ comment.comment }}
 					</p>
-					<p v-else class="py-1 mb-7">
-						{{ comment.comment }}
-					</p>
+
+					<div
+						class="inline-flex"
+						v-if="showEditTextArea && showEditIndex.includes(index)"
+					>
+						<button @click="handleCancelEditComment(comment.comment, index)">
+							Cancelar
+						</button>
+						<button class="ml-1.5" @click="handleSaveEditComment">
+							Salvar
+						</button>
+					</div>
+
+					<div
+						v-else-if="index === commentsResponse.length - 1"
+						class="inline-flex text-sm"
+					>
+						<button
+							class="text-kanban-column-title font-semibold"
+							@click="handleEditClick(index)"
+						>
+							Editar
+						</button>
+
+						<button
+							class="text-kanban-column-title font-semibold ml-1.5"
+							@click="showExcludeCommentModal = true"
+						>
+							Excluir
+						</button>
+
+						<ExcludeCommentModal
+							v-show="showExcludeCommentModal"
+							:commentId="comment.id"
+							@close-exclude-comment-modal="handleExcludeCommentModal"
+						/>
+					</div>
+
+					<div v-else class="inline-flex mb-7 text-sm">
+						<button
+							class="text-kanban-column-title font-semibold"
+							@click="handleEditClick(index)"
+						>
+							Editar
+						</button>
+
+						<button
+							class="text-kanban-column-title font-semibold ml-1.5"
+							@click="showExcludeCommentModal = true"
+						>
+							Excluir
+						</button>
+
+						<ExcludeCommentModal
+							v-show="showExcludeCommentModal"
+							:commentId="comment.id"
+							@close-exclude-comment-modal="handleExcludeCommentModal"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -111,32 +175,44 @@
 </template>
 
 <script lang="ts">
-import * as moment from 'moment';
-import 'moment/locale/pt-br';
-moment.locale('pt-br');
-
 enum WindowEnum {
 	COMMENTS = 'COMMENTS',
 	INFOS = 'INFOS',
 }
-
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
 import Vue from 'vue';
 import {
-	ICommentsGetAll,
 	ICommentsGetAllResponse,
+	ICommentsResponse,
 	ICustomer,
 } from '../../utils/types';
 import VueMask from 'v-mask';
+
+moment.locale('pt-br');
 Vue.use(VueMask);
 Vue.prototype.moment = moment;
 
 export default Vue.extend({
 	data() {
 		return {
+			showEditTextArea: false,
 			customer: {} as ICustomer,
 			window: WindowEnum.COMMENTS,
-			commentsResponse: [] as ICommentsGetAll[],
+			commentsResponse: [] as ICommentsResponse[],
 			commentInTextArea: '',
+			focusWindow: {
+				background: '#505F79',
+				color: '#FFFFFF',
+			},
+			notFocusWindow: {
+				background: '#E7E9FF',
+				color: '#47484F',
+			},
+			showExcludeCommentModal: false,
+			showEditCommentModal: false,
+			showEditIndex: [] as number[],
+			cloneComments: [] as ICommentsResponse[],
 		};
 	},
 
@@ -145,20 +221,69 @@ export default Vue.extend({
 	},
 
 	async created(): Promise<void> {
-		this.customer = await this.$axios.$get(
-			`${this.$config.baseURL}/customers/${this.customerId}`
-		);
-
-		const response = await this.$axios.$get<ICommentsGetAllResponse>(
-			`${this.$config.baseURL}/comments`,
-			{ params: { customerId: this.customerId } }
-		);
-
-		this.commentsResponse = response.data;
+		await this.getCommentsInDatabase();
 	},
 
 	methods: {
-		async sendComment() {},
+		async getCommentsInDatabase(): Promise<void> {
+			try {
+				this.customer = await this.$axios.$get(
+					`${this.$config.baseURL}/customers/${this.customerId}`
+				);
+
+				const response = await this.$axios.$get<ICommentsGetAllResponse>(
+					`${this.$config.baseURL}/comments`,
+					{ params: { customerId: this.customerId } }
+				);
+
+				this.commentsResponse = response.data;
+				this.cloneComments = { ...this.commentsResponse };
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		async sendComment(): Promise<void> {
+			try {
+				const response = await this.$axios.post<ICommentsResponse>(
+					`${this.$config.baseURL}/comments`,
+					{
+						comment: this.commentInTextArea,
+						customerId: this.customerId,
+					}
+				);
+
+				if (response.status === 201) {
+					this.commentsResponse.push(response.data);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		handleEditClick(index: number): void {
+			this.showEditTextArea = true;
+			if (!this.showEditIndex.includes(index)) {
+				this.showEditIndex.push(index);
+			}
+		},
+
+		async handleExcludeCommentModal(): Promise<void> {
+			this.showExcludeCommentModal = false;
+			await this.getCommentsInDatabase();
+		},
+
+		handleCancelEditComment(commentInDatabase: string, index: number) {
+			console.log(commentInDatabase);
+			this.cloneComments[index].comment = commentInDatabase;
+			this.showEditTextArea = false;
+			let i = this.showEditIndex.indexOf(index);
+			if (i !== -1) {
+				this.showEditIndex.splice(i, 1);
+			}
+		},
+
+		handleSaveEditComment() {},
 	},
 });
 </script>
@@ -182,6 +307,13 @@ export default Vue.extend({
 	border-radius: 5px;
 	padding: 1.5rem 1.325rem;
 	max-height: 50rem;
+}
+
+@media screen and (max-width: 1390px) {
+	.modal {
+		width: 1000px;
+		max-height: 35rem;
+	}
 }
 
 h2 {

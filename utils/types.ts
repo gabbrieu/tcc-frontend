@@ -54,7 +54,7 @@ export interface IComments {
 	updatedAt: string;
 }
 
-export interface ICommentsGetAll {
+export interface ICommentsResponse {
 	id: string;
 	comment: string;
 	customerId: string;
@@ -64,6 +64,6 @@ export interface ICommentsGetAll {
 }
 
 export interface ICommentsGetAllResponse {
-	data: ICommentsGetAll[];
+	data: ICommentsResponse[];
 	count: number;
 }

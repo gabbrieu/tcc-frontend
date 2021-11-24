@@ -1,6 +1,6 @@
 <template>
 	<div class="modal-overlay cursor-auto" @click="$emit('close-edit-modal')">
-		<div class="modal" @click.stop>
+		<div class="modal overflow-auto" @click.stop>
 			<header class="flex justify-between border-b border-light-gray mb-4">
 				<h2 class="font-bold pl-3 text-lg">Edição de dados de um cliente</h2>
 				<div class="cursor-pointer mr-3" @click="$emit('close-edit-modal')">
@@ -97,7 +97,7 @@
 
 					<label for="descriptionNew">Descrição*</label>
 					<textarea
-						class="resize-none"
+						class="resize-none h-28"
 						type="text"
 						name="descriptionNew"
 						id="descriptionNew"
@@ -294,6 +294,13 @@ export default Vue.extend({
 	width: 700px;
 	border-radius: 5px;
 	padding: 0.625rem 0;
+	max-height: 50rem;
+}
+
+@media screen and (max-width: 1390px) {
+	.modal {
+		max-height: 38rem;
+	}
 }
 
 label,
