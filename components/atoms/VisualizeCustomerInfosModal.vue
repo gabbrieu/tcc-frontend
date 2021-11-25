@@ -58,6 +58,7 @@
 						id="comments"
 						v-model.trim="commentInTextArea"
 						placeholder="Adicione um comentário"
+						required
 					/>
 					<button
 						type="submit"
@@ -321,8 +322,13 @@ export default Vue.extend({
 					const indexOfFoundComment = this.commentsResponse.findIndex(
 						(c) => c.id === response.data.id
 					);
-					this.commentsResponse[indexOfFoundComment].comment =
-						response.data.comment;
+
+					this.commentsResponse.splice(indexOfFoundComment, 1, {
+						...this.commentsResponse[indexOfFoundComment],
+						comment: response.data.comment,
+						updatedAt: response.data.updatedAt,
+					});
+
 					let i = this.showEditIndex.indexOf(index);
 					if (i !== -1) {
 						this.showEditIndex.splice(i, 1);
