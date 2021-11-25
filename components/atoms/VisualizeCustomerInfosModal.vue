@@ -92,65 +92,72 @@
 						</span>
 					</div>
 
-					<textarea
+					<form
 						v-if="showEditIndex.includes(index)"
-						class="
-							resize-none
-							border border-border-color
-							pt-1.5
-							pl-1.5
-							w-full
-							h-28
-						"
-						type="text"
-						name="editComments"
-						v-model.trim="cloneComments[index].comment"
-					/>
+						@submit.prevent="handleSaveEditComment(index, comment.id)"
+					>
+						<textarea
+							class="
+								resize-none
+								border border-border-color
+								pt-1.5
+								pl-1.5
+								w-full
+								h-28
+							"
+							type="text"
+							name="editComments"
+							v-model.trim="cloneComments[index].comment"
+							required
+						/>
 
-					<p v-else class="py-1">
+						<div class="inline-flex mb-6 mt-1">
+							<button
+								type="button"
+								class="
+									p-1
+									border
+									rounded-md
+									text-red
+									border-red
+									hover:bg-red hover:text-white
+									font-semibold
+									text-sm
+								"
+								@click="handleCancelEditComment(comment.comment, index)"
+							>
+								Cancelar
+							</button>
+							<button
+								type="submit"
+								class="
+									p-1
+									ml-1.5
+									border
+									rounded-md
+									text-blue
+									border-blue
+									hover:bg-blue hover:text-white
+									font-semibold
+									text-sm
+								"
+							>
+								Salvar
+							</button>
+						</div>
+					</form>
+
+					<p v-if="!showEditIndex.includes(index)" class="py-1">
 						<span class="text-sm whitespace-pre-wrap">{{
 							comment.comment
 						}}</span>
 					</p>
-					<div
-						class="inline-flex mb-6 mt-1"
-						v-if="showEditIndex.includes(index)"
-					>
-						<button
-							class="
-								p-1
-								border
-								rounded-md
-								text-red
-								border-red
-								hover:bg-red hover:text-white
-								font-semibold
-								text-sm
-							"
-							@click="handleCancelEditComment(comment.comment, index)"
-						>
-							Cancelar
-						</button>
-						<button
-							class="
-								p-1
-								ml-1.5
-								border
-								rounded-md
-								text-blue
-								border-blue
-								hover:bg-blue hover:text-white
-								font-semibold
-								text-sm
-							"
-							@click="handleSaveEditComment(index, comment.id)"
-						>
-							Salvar
-						</button>
-					</div>
 
 					<div
-						v-else-if="index === commentsResponse.length - 1"
+						v-if="
+							index === commentsResponse.length - 1 &&
+							!showEditIndex.includes(index)
+						"
 						class="inline-flex text-sm"
 					>
 						<button
@@ -174,7 +181,10 @@
 						/>
 					</div>
 
-					<div v-else class="inline-flex mb-7 text-sm">
+					<div
+						v-else-if="!showEditIndex.includes(index)"
+						class="inline-flex mb-7 text-sm"
+					>
 						<button
 							class="text-kanban-column-title font-semibold"
 							@click="handleEditClick(index)"
@@ -283,7 +293,9 @@ export default Vue.extend({
 				if (response.status === 201) {
 					this.commentInTextArea = '';
 					this.commentsResponse.push(response.data);
-					this.cloneComments.push(response.data);
+					this.cloneComments = JSON.parse(
+						JSON.stringify(this.commentsResponse)
+					);
 				}
 			} catch (error) {
 				console.log(error);
@@ -302,11 +314,16 @@ export default Vue.extend({
 		},
 
 		handleCancelEditComment(commentInDatabase: string, index: number) {
-			this.cloneComments[index].comment = commentInDatabase;
-			let i = this.showEditIndex.indexOf(index);
-			if (i !== -1) {
-				this.showEditIndex.splice(i, 1);
-			}
+			console.log(this.commentsResponse);
+			this.cloneComments.splice(index, 1, {
+				...this.cloneComments[index],
+				comment: commentInDatabase,
+			});
+			console.log(
+				this.cloneComments[index].comment,
+				this.commentsResponse[index].comment
+			);
+			this.closeEditCommentTextarea(index);
 		},
 
 		async handleSaveEditComment(index: number, commentId: string) {
@@ -329,13 +346,17 @@ export default Vue.extend({
 						updatedAt: response.data.updatedAt,
 					});
 
-					let i = this.showEditIndex.indexOf(index);
-					if (i !== -1) {
-						this.showEditIndex.splice(i, 1);
-					}
+					this.closeEditCommentTextarea(index);
 				}
 			} catch (error) {
 				console.log(error);
+			}
+		},
+
+		closeEditCommentTextarea(index: number) {
+			let i = this.showEditIndex.indexOf(index);
+			if (i !== -1) {
+				this.showEditIndex.splice(i, 1);
 			}
 		},
 	},
