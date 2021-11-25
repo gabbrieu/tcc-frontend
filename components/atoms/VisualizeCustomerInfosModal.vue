@@ -92,7 +92,7 @@
 					</div>
 
 					<textarea
-						v-if="showEditTextArea && showEditIndex.includes(index)"
+						v-if="showEditIndex.includes(index)"
 						class="
 							resize-none
 							border border-border-color
@@ -106,18 +106,44 @@
 						v-model.trim="cloneComments[index].comment"
 					/>
 
-					<p v-else class="py-1 text-sm">
-						{{ comment.comment }}
+					<p v-else class="py-1">
+						<span class="text-sm whitespace-pre-wrap">{{
+							comment.comment
+						}}</span>
 					</p>
-
 					<div
-						class="inline-flex"
-						v-if="showEditTextArea && showEditIndex.includes(index)"
+						class="inline-flex mb-6 mt-1"
+						v-if="showEditIndex.includes(index)"
 					>
-						<button @click="handleCancelEditComment(comment.comment, index)">
+						<button
+							class="
+								p-1
+								border
+								rounded-md
+								text-red
+								border-red
+								hover:bg-red hover:text-white
+								font-semibold
+								text-sm
+							"
+							@click="handleCancelEditComment(comment.comment, index)"
+						>
 							Cancelar
 						</button>
-						<button class="ml-1.5" @click="handleSaveEditComment">
+						<button
+							class="
+								p-1
+								ml-1.5
+								border
+								rounded-md
+								text-blue
+								border-blue
+								hover:bg-blue hover:text-white
+								font-semibold
+								text-sm
+							"
+							@click="handleSaveEditComment(index, comment.id)"
+						>
 							Salvar
 						</button>
 					</div>
@@ -183,6 +209,7 @@ import * as moment from 'moment';
 import 'moment/locale/pt-br';
 import Vue from 'vue';
 import {
+	IComments,
 	ICommentsGetAllResponse,
 	ICommentsResponse,
 	ICustomer,
@@ -196,7 +223,6 @@ Vue.prototype.moment = moment;
 export default Vue.extend({
 	data() {
 		return {
-			showEditTextArea: false,
 			customer: {} as ICustomer,
 			window: WindowEnum.COMMENTS,
 			commentsResponse: [] as ICommentsResponse[],
@@ -237,7 +263,7 @@ export default Vue.extend({
 				);
 
 				this.commentsResponse = response.data;
-				this.cloneComments = { ...this.commentsResponse };
+				this.cloneComments = JSON.parse(JSON.stringify(response.data));
 			} catch (error) {
 				console.log(error);
 			}
@@ -254,7 +280,9 @@ export default Vue.extend({
 				);
 
 				if (response.status === 201) {
+					this.commentInTextArea = '';
 					this.commentsResponse.push(response.data);
+					this.cloneComments.push(response.data);
 				}
 			} catch (error) {
 				console.log(error);
@@ -262,7 +290,6 @@ export default Vue.extend({
 		},
 
 		handleEditClick(index: number): void {
-			this.showEditTextArea = true;
 			if (!this.showEditIndex.includes(index)) {
 				this.showEditIndex.push(index);
 			}
@@ -274,16 +301,37 @@ export default Vue.extend({
 		},
 
 		handleCancelEditComment(commentInDatabase: string, index: number) {
-			console.log(commentInDatabase);
 			this.cloneComments[index].comment = commentInDatabase;
-			this.showEditTextArea = false;
 			let i = this.showEditIndex.indexOf(index);
 			if (i !== -1) {
 				this.showEditIndex.splice(i, 1);
 			}
 		},
 
-		handleSaveEditComment() {},
+		async handleSaveEditComment(index: number, commentId: string) {
+			try {
+				const response = await this.$axios.patch<IComments>(
+					`${this.$config.baseURL}/comments/${commentId}`,
+					{
+						comment: this.cloneComments[index].comment,
+					}
+				);
+
+				if (response.status === 200) {
+					const indexOfFoundComment = this.commentsResponse.findIndex(
+						(c) => c.id === response.data.id
+					);
+					this.commentsResponse[indexOfFoundComment].comment =
+						response.data.comment;
+					let i = this.showEditIndex.indexOf(index);
+					if (i !== -1) {
+						this.showEditIndex.splice(i, 1);
+					}
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		},
 	},
 });
 </script>
