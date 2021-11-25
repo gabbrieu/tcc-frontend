@@ -169,14 +169,14 @@
 
 						<button
 							class="text-kanban-column-title font-semibold ml-1.5"
-							@click="showExcludeCommentModal = true"
+							@click="handleExcludeCommentOpen(comment.id)"
 						>
 							Excluir
 						</button>
 
 						<ExcludeCommentModal
 							v-show="showExcludeCommentModal"
-							:commentId="comment.id"
+							:commentId="commentToExclude"
 							@close-exclude-comment-modal="handleExcludeCommentModal"
 						/>
 					</div>
@@ -194,14 +194,14 @@
 
 						<button
 							class="text-kanban-column-title font-semibold ml-1.5"
-							@click="showExcludeCommentModal = true"
+							@click="handleExcludeCommentOpen(comment.id)"
 						>
 							Excluir
 						</button>
 
 						<ExcludeCommentModal
 							v-show="showExcludeCommentModal"
-							:commentId="comment.id"
+							:commentId="commentToExclude"
 							@close-exclude-comment-modal="handleExcludeCommentModal"
 						/>
 					</div>
@@ -250,6 +250,7 @@ export default Vue.extend({
 			showEditCommentModal: false,
 			showEditIndex: [] as number[],
 			cloneComments: [] as ICommentsResponse[],
+			commentToExclude: '',
 		};
 	},
 
@@ -310,19 +311,15 @@ export default Vue.extend({
 
 		async handleExcludeCommentModal(): Promise<void> {
 			this.showExcludeCommentModal = false;
+			this.commentToExclude = '';
 			await this.getCommentsInDatabase();
 		},
 
 		handleCancelEditComment(commentInDatabase: string, index: number) {
-			console.log(this.commentsResponse);
 			this.cloneComments.splice(index, 1, {
 				...this.cloneComments[index],
 				comment: commentInDatabase,
 			});
-			console.log(
-				this.cloneComments[index].comment,
-				this.commentsResponse[index].comment
-			);
 			this.closeEditCommentTextarea(index);
 		},
 
@@ -358,6 +355,11 @@ export default Vue.extend({
 			if (i !== -1) {
 				this.showEditIndex.splice(i, 1);
 			}
+		},
+
+		handleExcludeCommentOpen(commentId: string) {
+			this.showExcludeCommentModal = true;
+			this.commentToExclude = commentId;
 		},
 	},
 });
