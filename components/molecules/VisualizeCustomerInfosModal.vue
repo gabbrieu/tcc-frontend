@@ -16,7 +16,7 @@
 					class="cursor-pointer mr-3"
 					@click="$emit('close-customer-info-modal')"
 				>
-					<img class="w-3 mt-2" src="~/assets/close-icon.svg" alt="" />
+					<img class="w-5 mt-2" src="~/assets/close-icon.svg" alt="" />
 				</div>
 			</header>
 
@@ -41,6 +41,133 @@
 					:style="window === 'INFOS' ? focusWindow : notFocusWindow"
 				/>
 			</div>
+
+			<section class="flex mt-3" v-if="window === 'INFOS'">
+				<ul class="flex-col flex-1">
+					<li class="text-kanban-column-title">
+						<span class="font-semibold">Nome: </span>{{ customer.name }}
+					</li>
+
+					<li class="text-kanban-column-title" v-if="customer.email">
+						<a :href="`mailto:${customer.email}`"
+							><span class="font-semibold">Email: </span>{{ customer.email }}</a
+						>
+					</li>
+
+					<li class="text-kanban-column-title">
+						<span class="font-semibold">Celular: </span>{{ customer.cellphone }}
+					</li>
+
+					<li
+						class="text-kanban-column-title"
+						v-if="customer.document.length > 11"
+					>
+						<span class="font-semibold">CNPJ: </span
+						>{{ customer.document | VMask('##.##.###/####-##') }}
+					</li>
+
+					<li class="text-kanban-column-title" v-else>
+						<span class="font-semibold">CPF: </span
+						>{{ customer.document | VMask('###.###.###-##') }}
+					</li>
+
+					<li class="text-kanban-column-title">
+						<span class="font-semibold">Data de nascimento: </span
+						>{{ moment(customer.birthDate).format('DD/MM/YYYY') }}
+					</li>
+
+					<li class="text-kanban-column-title">
+						<span class="font-semibold">Gênero: </span
+						>{{
+							customer.gender.charAt(0) + customer.gender.slice(1).toLowerCase()
+						}}
+					</li>
+				</ul>
+
+				<ul class="flex-col flex-1">
+					<li class="text-kanban-column-title">
+						<span class="font-semibold">Cidade: </span> {{ customer.city }}
+					</li>
+
+					<li class="text-kanban-column-title">
+						<span class="font-semibold">Bairro: </span> {{ customer.district }}
+					</li>
+
+					<li class="text-kanban-column-title">
+						<span class="font-semibold">Rua: </span> {{ customer.street }}
+					</li>
+
+					<li class="text-kanban-column-title">
+						<span class="font-semibold">Número: </span>
+						{{ customer.houseNumber }}
+					</li>
+				</ul>
+
+				<ul class="flex-col flex-1">
+					<li class="text-kanban-column-title inline-flex">
+						<span class="font-semibold">Prioridade:&nbsp;</span>
+						<div
+							class="inline-flex items-center"
+							v-if="customer.priority === 'VERY_LOW'"
+						>
+							Muito baixa&nbsp;
+							<div class="w-4 h-4 bg-priority-very-low" id="circulo"></div>
+						</div>
+
+						<div
+							class="inline-flex items-center"
+							v-else-if="customer.priority === 'LOW'"
+						>
+							Baixa&nbsp;
+							<div class="w-4 h-4 bg-priority-low" id="circulo"></div>
+						</div>
+
+						<div
+							class="inline-flex items-center"
+							v-else-if="customer.priority === 'MEDIUM'"
+						>
+							Média&nbsp;
+							<div class="w-4 h-4 bg-priority-medium" id="circulo"></div>
+						</div>
+
+						<div
+							class="inline-flex items-center"
+							v-else-if="customer.priority === 'HIGH'"
+						>
+							Alta&nbsp;
+							<div class="w-4 h-4 bg-priority-high" id="circulo"></div>
+						</div>
+
+						<div class="inline-flex items-center" v-else>
+							Urgente&nbsp;
+							<div class="w-4 h-4 bg-priority-urgent" id="circulo"></div>
+						</div>
+					</li>
+
+					<li class="text-kanban-column-title">
+						<p v-if="customer.column === 1">
+							<span class="font-semibold">Etapa da jornada:&nbsp;</span>Cliente
+							em potencial
+						</p>
+						<p v-else-if="customer.column === 2">
+							<span class="font-semibold">Etapa da jornada:&nbsp;</span>Contato
+							realizado
+						</p>
+						<p v-else-if="customer.column === 3">
+							<span class="font-semibold">Etapa da jornada:&nbsp;</span>Visita
+							agendada
+						</p>
+						<p v-else-if="customer.column === 4">
+							<span class="font-semibold">Etapa da jornada:&nbsp;</span>Negócio
+							em andamento
+						</p>
+						<p v-else>
+							<span class="font-semibold">Etapa da jornada:&nbsp;</span
+							>Finalizados
+						</p>
+					</li>
+				</ul>
+			</section>
 
 			<div class="flex flex-col mt-3" v-if="window === 'COMMENTS'">
 				<form v-on:submit.prevent="sendComment">
@@ -366,6 +493,23 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+#circulo {
+	border-radius: 50%;
+}
+
+li {
+	padding-top: 0.125rem /* 2px */;
+	padding-bottom: 0.125rem /* 2px */;
+}
+
+li:first-child {
+	padding-top: 0;
+}
+
+li:last-child {
+	padding-bottom: 0;
+}
+
 .modal-overlay {
 	position: fixed;
 	top: 0;
