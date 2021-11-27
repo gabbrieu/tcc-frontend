@@ -66,7 +66,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -75,7 +75,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -115,7 +115,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -132,6 +132,33 @@
 										v-show="showExcludeCardModal"
 										@close-exclude-modal="showExcludeCardModal = false"
 										v-on="$listeners"
+									/>
+								</div>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+									@click="showCustomerInfoModal = true"
+								>
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/eye.svg"
+										alt="Ícone para visualizar um cliente"
+									/>
+									<p class="font-medium">Visualizar cliente</p>
+								</div>
+								<div :key="index">
+									<VisualizeCustomerInfosModal
+										v-show="showCustomerInfoModal"
+										:customerId="customer.id"
+										@close-customer-info-modal="showCustomerInfoModal = false"
 									/>
 								</div>
 							</Popover>
@@ -258,7 +285,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -267,7 +294,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -307,7 +334,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -324,6 +351,33 @@
 										v-show="showExcludeCardModal"
 										@close-exclude-modal="showExcludeCardModal = false"
 										v-on="$listeners"
+									/>
+								</div>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+									@click="showCustomerInfoModal = true"
+								>
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/eye.svg"
+										alt="Ícone para visualizar um cliente"
+									/>
+									<p class="font-medium">Visualizar cliente</p>
+								</div>
+								<div :key="index">
+									<VisualizeCustomerInfosModal
+										v-show="showCustomerInfoModal"
+										:customerId="customer.id"
+										@close-customer-info-modal="showCustomerInfoModal = false"
 									/>
 								</div>
 							</Popover>
@@ -450,7 +504,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -459,7 +513,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -499,7 +553,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -516,6 +570,33 @@
 										v-show="showExcludeCardModal"
 										@close-exclude-modal="showExcludeCardModal = false"
 										v-on="$listeners"
+									/>
+								</div>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+									@click="showCustomerInfoModal = true"
+								>
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/eye.svg"
+										alt="Ícone para visualizar um cliente"
+									/>
+									<p class="font-medium">Visualizar cliente</p>
+								</div>
+								<div :key="index">
+									<VisualizeCustomerInfosModal
+										v-show="showCustomerInfoModal"
+										:customerId="customer.id"
+										@close-customer-info-modal="showCustomerInfoModal = false"
 									/>
 								</div>
 							</Popover>
@@ -642,7 +723,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -651,7 +732,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -691,7 +772,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -708,6 +789,33 @@
 										v-show="showExcludeCardModal"
 										@close-exclude-modal="showExcludeCardModal = false"
 										v-on="$listeners"
+									/>
+								</div>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+									@click="showCustomerInfoModal = true"
+								>
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/eye.svg"
+										alt="Ícone para visualizar um cliente"
+									/>
+									<p class="font-medium">Visualizar cliente</p>
+								</div>
+								<div :key="index">
+									<VisualizeCustomerInfosModal
+										v-show="showCustomerInfoModal"
+										:customerId="customer.id"
+										@close-customer-info-modal="showCustomerInfoModal = false"
 									/>
 								</div>
 							</Popover>
@@ -834,7 +942,7 @@
 							<Popover
 								class="cursor-default not-drag"
 								:name="customer.id"
-								:width="160"
+								:width="182"
 							>
 								<div
 									class="
@@ -843,7 +951,7 @@
 										pt-2
 										pl-2
 										pb-2
-										pr-4
+										pr-9.5
 										hover:bg-background
 									"
 								>
@@ -883,7 +991,7 @@
 										pt-2
 										pb-2
 										pl-2
-										pr-2.5
+										pr-8
 										hover:bg-background
 									"
 								>
@@ -900,6 +1008,33 @@
 										v-show="showExcludeCardModal"
 										@close-exclude-modal="showExcludeCardModal = false"
 										v-on="$listeners"
+									/>
+								</div>
+								<div
+									class="
+										cursor-pointer
+										inline-flex
+										mt-1
+										pt-2
+										pb-2
+										pl-2
+										pr-2.5
+										hover:bg-background
+									"
+									@click="showCustomerInfoModal = true"
+								>
+									<img
+										class="w-5 h-5 mr-2"
+										src="~/assets/eye.svg"
+										alt="Ícone para visualizar um cliente"
+									/>
+									<p class="font-medium">Visualizar cliente</p>
+								</div>
+								<div :key="index">
+									<VisualizeCustomerInfosModal
+										v-show="showCustomerInfoModal"
+										:customerId="customer.id"
+										@close-customer-info-modal="showCustomerInfoModal = false"
 									/>
 								</div>
 							</Popover>
@@ -979,6 +1114,8 @@ export default Vue.extend({
 			fifthColumnNew: this.fifthColumn as ICustomer[],
 			showEditCardModal: false,
 			showExcludeCardModal: false,
+			showCustomerInfoModal: false,
+			index: 0,
 		};
 	},
 
@@ -1034,6 +1171,7 @@ export default Vue.extend({
 		},
 
 		updateCustomerInfos(customerUpdated: ICustomer | undefined) {
+			this.index += 1;
 			this.showEditCardModal = false;
 			if (customerUpdated) {
 				switch (customerUpdated.column) {

@@ -1,21 +1,27 @@
 <template>
-	<div class="modal-overlay cursor-auto" @click="$emit('close-exclude-modal')">
+	<div
+		class="modal-overlay cursor-auto"
+		@click="$emit('close-exclude-comment-modal')"
+	>
 		<div class="modal" @click.stop>
 			<header class="flex justify-between border-b border-light-gray mb-4">
-				<h2 class="font-bold pl-3 text-lg">Exclusão de um cliente</h2>
-				<div class="cursor-pointer mr-3" @click="$emit('close-exclude-modal')">
+				<h2 class="font-bold pl-3 text-lg">Exclusão de um comentário</h2>
+				<div
+					class="cursor-pointer mr-3"
+					@click="$emit('close-exclude-comment-modal')"
+				>
 					<img class="w-3 mt-2" src="~/assets/close-icon.svg" alt="" />
 				</div>
 			</header>
-			<form v-on:submit.prevent="excludeClient" class="flex flex-col">
+			<form v-on:submit.prevent="excludeComment" class="flex flex-col">
 				<p class="ml-3 flex flex-row">
 					Deseja realmente
 					<span class="text-red font-semibold pr-1 pl-1"> excluir </span> esse
-					cliente?
+					comentário?
 				</p>
 				<div class="flex flex-row justify-end">
 					<button
-						@click="$emit('close-exclude-modal')"
+						@click="$emit('close-exclude-comment-modal')"
 						class="
 							flex flex-col
 							p-2
@@ -26,6 +32,7 @@
 							w-auto
 							hover:bg-green hover:text-white
 						"
+						type="button"
 					>
 						Cancelar
 					</button>
@@ -54,23 +61,21 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import VueMask from 'v-mask';
-Vue.use(VueMask);
 
 export default Vue.extend({
 	props: {
-		customerId: String,
+		commentId: String,
 	},
 
 	methods: {
-		async excludeClient() {
+		async excludeComment() {
 			try {
 				const response = await this.$axios.delete(
-					`${this.$config.baseURL}/customers/${this.customerId}`
+					`${this.$config.baseURL}/comments/${this.commentId}`
 				);
 
 				if (response.status === 204) {
-					this.$emit('close-exclude-modal');
+					this.$emit('close-exclude-comment-modal');
 				}
 			} catch (error) {
 				console.log(error);

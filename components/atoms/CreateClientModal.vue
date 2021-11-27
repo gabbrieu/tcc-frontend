@@ -1,6 +1,6 @@
 <template>
 	<div class="modal-overlay" @click="$emit('close-modal')">
-		<div class="modal" @click.stop>
+		<div class="modal overflow-auto" @click.stop>
 			<header class="flex justify-between border-b border-light-gray mb-4">
 				<h2 class="font-bold pl-3 text-lg">Cadastro de cliente</h2>
 				<div class="cursor-pointer mr-3" @click="$emit('close-modal')">
@@ -38,15 +38,95 @@
 						v-model.trim="email"
 						placeholder="Digite o email do cliente"
 					/>
-
-					<label for="document">CPF*</label>
+					<ul
+						class="
+							filter-switch
+							inline-flex
+							items-center
+							relative
+							h-10
+							py-1
+							pr-1
+							space-x-1
+							rounded-md
+							font-semibold
+							text-blue-600
+							mt-1
+							mb-0.5
+						"
+					>
+						<li class="filter-switch-item flex relative h-8">
+							<input
+								type="radio"
+								id="CPF"
+								value="CPF"
+								v-model="typeDocument"
+								class="sr-only"
+								checked
+							/>
+							<label
+								for="CPF"
+								class="
+									h-8
+									py-1
+									px-2
+									text-sm
+									leading-6
+									text-gray-600
+									hover:text-gray-800
+									bg-white
+									rounded
+									shadow
+								"
+								>CPF</label
+							>
+							<div aria-hidden="true" class="filter-active"></div>
+						</li>
+						<li class="filter-switch-item flex relative h-8">
+							<input
+								type="radio"
+								id="CNPJ"
+								value="CNPJ"
+								v-model="typeDocument"
+								class="sr-only"
+							/>
+							<label
+								for="CNPJ"
+								class="
+									h-8
+									py-1
+									px-2
+									text-sm
+									leading-6
+									text-gray-600
+									hover:text-gray-800
+									bg-white
+									rounded
+									shadow
+								"
+								>CNPJ</label
+							>
+						</li>
+					</ul>
 					<input
+						v-if="typeDocument === 'CPF'"
 						type="text"
 						name="document"
-						id="document"
+						id="document1"
 						v-model.trim="document"
 						v-mask="'###.###.###-##'"
 						placeholder="Digite o CPF do cliente"
+						required
+					/>
+
+					<input
+						v-else
+						type="text"
+						name="document"
+						id="document2"
+						v-model.trim="document"
+						v-mask="'##.###.###/####-##'"
+						placeholder="Digite o CNPJ do cliente"
 						required
 					/>
 
@@ -80,7 +160,7 @@
 
 					<label for="description">Descrição*</label>
 					<textarea
-						class="resize-none"
+						class="resize-none h-28"
 						type="text"
 						name="description"
 						id="description"
@@ -185,6 +265,7 @@ export default Vue.extend({
 			houseNumber: '',
 			description: '',
 			priority: PriorityEnum.MEDIUM,
+			typeDocument: 'CPF',
 		};
 	},
 
@@ -239,6 +320,19 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.filter-switch label {
+	cursor: pointer;
+}
+
+.filter-switch-item input:checked + label {
+	color: inherit;
+}
+
+.filter-switch-item input:not(:checked) + label {
+	--bg-opacity: 0;
+	box-shadow: none;
+}
+
 .modal-overlay {
 	position: fixed;
 	top: 0;
@@ -249,7 +343,6 @@ export default Vue.extend({
 	justify-content: center;
 	background-color: #000000da;
 	align-items: center;
-	font-family: 'Roboto', sans-serif;
 }
 
 .modal {
@@ -257,6 +350,13 @@ export default Vue.extend({
 	width: 700px;
 	border-radius: 5px;
 	padding: 0.625rem 0;
+	max-height: 50rem;
+}
+
+@media screen and (max-width: 1390px) {
+	.modal {
+		max-height: 38rem;
+	}
 }
 
 label,
