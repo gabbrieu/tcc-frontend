@@ -85,16 +85,6 @@
 						<option value="NÃO INFORMADO">Não informado</option>
 					</select>
 
-					<p>Etapa da Jornada*</p>
-					<select class="cursor-pointer" name="columnNew" v-model="columnNew">
-						<option disabled value="">Escolha um item</option>
-						<option :value="1">Cliente em potencial</option>
-						<option :value="2">Contato realizado</option>
-						<option :value="3">Visita agendada</option>
-						<option :value="4">Negócio em andamento</option>
-						<option :value="5">Finalizados</option>
-					</select>
-
 					<label for="descriptionNew">Descrição*</label>
 					<textarea
 						class="resize-none h-28"
@@ -199,7 +189,6 @@ export default Vue.extend({
 			documentNew: this.document,
 			birthDateNew: this.birthDate,
 			genderNew: this.gender,
-			columnNew: this.column,
 			cityNew: this.city,
 			streetNew: this.street,
 			districtNew: this.district,
@@ -218,7 +207,6 @@ export default Vue.extend({
 		gender: {
 			type: String as PropType<GenderEnum>,
 		},
-		column: Number,
 		city: String,
 		street: String,
 		district: String,
@@ -260,7 +248,6 @@ export default Vue.extend({
 						birthDate: this.birthDateNew,
 						cellphone: cellphoneWithoutPunctuation,
 						city: this.cityNew,
-						column: this.columnNew,
 						priority: this.priorityNew,
 					}
 				);
