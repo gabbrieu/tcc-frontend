@@ -279,7 +279,7 @@ export default Vue.extend({
 					`${this.$config.baseURL}/customers`,
 					{
 						name: this.name,
-						email: this.email,
+						email: this.email === '' ? undefined : this.email,
 						document: documentWithoutPunctuation,
 						district: this.district,
 						description: this.description,
